@@ -1005,14 +1005,15 @@ function initChangelogModal() {
         document.body.style.overflow = 'hidden';
         
         // Load changelog if not already loaded
-        if (changelogBody.querySelector('.modal-loading')) {
+        if (changelogBody && changelogBody.querySelector('.modal-loading')) {
             try {
                 const response = await fetch('CHANGELOG.md');
-                if (!response.ok) throw new Error('Failed to load changelog');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const markdown = await response.text();
                 changelogBody.innerHTML = `<div class="changelog-content">${parseMarkdown(markdown)}</div>`;
             } catch (error) {
-                changelogBody.innerHTML = `<p style="color: var(--error);">Failed to load changelog. Please try again later.</p>`;
+                console.error('Changelog load error:', error);
+                changelogBody.innerHTML = `<p style="color: var(--error);">Failed to load changelog: ${error.message}</p>`;
             }
         }
     });
