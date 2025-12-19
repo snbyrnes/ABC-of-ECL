@@ -880,8 +880,12 @@ function handleExampleClick(e) {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            // Skip if it's just "#" (used for modal triggers)
+            if (href === '#') return;
+            
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 const offset = 80; // Account for fixed navbar
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
