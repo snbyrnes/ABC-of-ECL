@@ -990,5 +990,88 @@ function loadExample(exampleId) {
     }
 }
 
+// ===== Changelog Modal =====
+function initChangelogModal() {
+    const changelogLink = document.getElementById('changelogLink');
+    const changelogModal = document.getElementById('changelogModal');
+    const changelogClose = document.getElementById('changelogClose');
+    const changelogBody = document.getElementById('changelogBody');
+    
+    if (!changelogLink || !changelogModal) return;
+    
+    changelogLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+        changelogModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Load changelog if not already loaded
+        if (changelogBody.querySelector('.modal-loading')) {
+            try {
+                const response = await fetch('CHANGELOG.md');
+                if (!response.ok) throw new Error('Failed to load changelog');
+                const markdown = await response.text();
+                changelogBody.innerHTML = `<div class="changelog-content">${parseMarkdown(markdown)}</div>`;
+            } catch (error) {
+                changelogBody.innerHTML = `<p style="color: var(--error);">Failed to load changelog. Please try again later.</p>`;
+            }
+        }
+    });
+    
+    changelogClose?.addEventListener('click', closeChangelogModal);
+    
+    changelogModal.addEventListener('click', (e) => {
+        if (e.target === changelogModal) {
+            closeChangelogModal();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && changelogModal.classList.contains('active')) {
+            closeChangelogModal();
+        }
+    });
+}
+
+function closeChangelogModal() {
+    const changelogModal = document.getElementById('changelogModal');
+    if (changelogModal) {
+        changelogModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function parseMarkdown(markdown) {
+    // Simple markdown to HTML parser
+    return markdown
+        // Headers
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        // Bold
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        // Unordered lists (process blocks)
+        .replace(/(?:^- .+$\n?)+/gm, (match) => {
+            const items = match.trim().split('\n')
+                .map(line => `<li>${line.replace(/^- /, '')}</li>`)
+                .join('');
+            return `<ul>${items}</ul>`;
+        })
+        // Horizontal rules
+        .replace(/^---$/gm, '<hr>')
+        // Line breaks for remaining text
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/^(?!<[huplo])(.+)$/gm, '<p>$1</p>')
+        // Clean up empty paragraphs
+        .replace(/<p><\/p>/g, '')
+        .replace(/<p>(<[hulo])/g, '$1')
+        .replace(/(<\/[hulo][^>]*>)<\/p>/g, '$1');
+}
+
 // Start the application
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    initChangelogModal();
+});
+

@@ -1377,6 +1377,147 @@ a.try-btn {
     display: inline-block;
 }
 
+/* ===== Modal ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    padding: 24px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-xl);
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.modal-header h3 i {
+    color: var(--primary-color);
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--background-secondary);
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--error);
+    color: white;
+}
+
+.modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+}
+
+.modal-loading i {
+    margin-right: 8px;
+}
+
+/* Changelog Content Styling */
+.changelog-content h2 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-top: 24px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.changelog-content h2:first-child {
+    margin-top: 0;
+}
+
+.changelog-content h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.changelog-content ul {
+    margin: 0 0 16px 0;
+    padding-left: 20px;
+}
+
+.changelog-content li {
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.changelog-content hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 24px 0;
+}
+
+.changelog-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.changelog-content a {
+    color: var(--primary-color);
+}
+
 /* ===== Loading Overlay ===== */
 .loading-overlay {
     position: fixed;

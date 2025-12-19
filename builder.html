@@ -226,7 +226,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 ABC of ECL. For educational purposes. Not for clinical use.</p>
-                <p>Powered by <a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver</a> | SNOMED CT® is a trademark of SNOMED International</p>
+                <p>Powered by <a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver</a> | SNOMED CT® is a trademark of SNOMED International | <a href="#" id="changelogLink">Changelog</a></p>
             </div>
         </div>
     </footer>
@@ -243,6 +243,23 @@
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
         <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- Changelog Modal -->
+    <div class="modal-overlay" id="changelogModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-history"></i> Changelog</h3>
+                <button class="modal-close" id="closeChangelog">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="changelogContent">
+                <div class="modal-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading changelog...
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>
