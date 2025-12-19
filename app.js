@@ -994,8 +994,8 @@ function loadExample(exampleId) {
 function initChangelogModal() {
     const changelogLink = document.getElementById('changelogLink');
     const changelogModal = document.getElementById('changelogModal');
-    const changelogClose = document.getElementById('changelogClose');
-    const changelogBody = document.getElementById('changelogBody');
+    const changelogClose = document.getElementById('closeChangelog');
+    const changelogBody = document.getElementById('changelogContent');
     
     if (!changelogLink || !changelogModal) return;
     
