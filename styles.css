@@ -1131,6 +1131,252 @@ select.form-control {
     text-decoration: none;
 }
 
+/* ===== Page Section (for multi-page layout) ===== */
+.page-section {
+    padding-top: 120px;
+    min-height: calc(100vh - 200px);
+}
+
+/* ===== CTA Section ===== */
+.cta-section {
+    margin-top: 60px;
+    text-align: center;
+    padding: 48px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(14, 165, 233, 0.1));
+    border-radius: var(--radius-xl);
+}
+
+.cta-section h3 {
+    margin-bottom: 12px;
+}
+
+.cta-section p {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== Nav Active State ===== */
+.nav-links a.active {
+    color: var(--primary-color);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* ===== Syntax Examples (Examples Page) ===== */
+.syntax-examples {
+    margin-top: 80px;
+    background: var(--surface);
+    padding: 40px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+}
+
+.syntax-examples h3 {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.syntax-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.syntax-card {
+    background: var(--background-secondary);
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+}
+
+.syntax-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.syntax-card p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.syntax-card pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    overflow-x: auto;
+}
+
+/* ===== Additional Resources (Resources Page) ===== */
+.additional-resources {
+    margin-top: 60px;
+}
+
+.additional-resources h3 {
+    margin-bottom: 24px;
+}
+
+.resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.resource-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.resource-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.resource-item-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.resource-item-icon i {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.resource-item-content h4 {
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.resource-item-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.resource-item-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.resource-item-content a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Server Info (Resources Page) ===== */
+.server-info {
+    margin-top: 60px;
+}
+
+.server-info h3 {
+    margin-bottom: 24px;
+}
+
+.server-card {
+    background: var(--surface);
+    padding: 32px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+}
+
+.server-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.server-header i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.server-header h4 {
+    margin-bottom: 4px;
+}
+
+.server-header code {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--background-secondary);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.server-card > p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.server-card ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.server-card ul li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.server-card ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+.server-note {
+    background: rgba(14, 165, 233, 0.1);
+    padding: 16px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.server-note i {
+    color: var(--info);
+    margin-top: 2px;
+}
+
+/* ===== Try Button as Link ===== */
+a.try-btn {
+    text-decoration: none;
+    display: inline-block;
+}
+
 /* ===== Loading Overlay ===== */
 .loading-overlay {
     position: fixed;

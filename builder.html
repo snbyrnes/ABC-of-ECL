@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Builder - ABC of ECL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-code"></i>
+                ABC of ECL
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="builder.html" class="active">Query Builder</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Query Builder Section -->
+    <section id="builder" class="builder-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>ECL Query Builder</h2>
+                <p>Build and test ECL queries interactively</p>
+            </div>
+            
+            <div class="builder-layout">
+                <!-- Query Templates -->
+                <div class="builder-sidebar">
+                    <h3><i class="fas fa-list"></i> Query Templates</h3>
+                    <p class="sidebar-description">Select a template to start building your query</p>
+                    
+                    <div class="template-category">
+                        <h4><i class="fas fa-pills"></i> Medicines</h4>
+                        <div class="template-list">
+                            <button class="template-btn" data-template="medicinal-products">
+                                <span class="template-name">All Medicinal Products</span>
+                                <span class="template-desc">Find all types of medicinal products</span>
+                            </button>
+                            <button class="template-btn" data-template="products-by-ingredient">
+                                <span class="template-name">Products by Ingredient</span>
+                                <span class="template-desc">Find products containing a specific substance</span>
+                            </button>
+                            <button class="template-btn" data-template="products-by-dose-form">
+                                <span class="template-name">Products by Dose Form</span>
+                                <span class="template-desc">Find products with a specific dose form</span>
+                            </button>
+                            <button class="template-btn" data-template="vtm-products">
+                                <span class="template-name">VTM Related Products</span>
+                                <span class="template-desc">Find products linked to a VTM</span>
+                            </button>
+                            <button class="template-btn" data-template="packaged-drugs">
+                                <span class="template-name">Packaged Clinical Drugs</span>
+                                <span class="template-desc">Find packaged clinical drug products</span>
+                            </button>
+                            <button class="template-btn" data-template="oral-medications">
+                                <span class="template-name">Oral Medications</span>
+                                <span class="template-desc">Find products with oral dose forms</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-category">
+                        <h4><i class="fas fa-heartbeat"></i> Clinical Findings</h4>
+                        <div class="template-list">
+                            <button class="template-btn" data-template="disorders">
+                                <span class="template-name">Clinical Findings</span>
+                                <span class="template-desc">Search for diseases and disorders</span>
+                            </button>
+                            <button class="template-btn" data-template="findings-by-site">
+                                <span class="template-name">Findings by Body Site</span>
+                                <span class="template-desc">Find conditions affecting specific anatomy</span>
+                            </button>
+                            <button class="template-btn" data-template="findings-by-morphology">
+                                <span class="template-name">Findings by Morphology</span>
+                                <span class="template-desc">Find conditions with specific morphology</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="template-category">
+                        <h4><i class="fas fa-stethoscope"></i> Procedures</h4>
+                        <div class="template-list">
+                            <button class="template-btn" data-template="procedures">
+                                <span class="template-name">All Procedures</span>
+                                <span class="template-desc">Search for clinical procedures</span>
+                            </button>
+                            <button class="template-btn" data-template="procedures-by-site">
+                                <span class="template-name">Procedures by Site</span>
+                                <span class="template-desc">Find procedures on specific body sites</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="template-category">
+                        <h4><i class="fas fa-code"></i> Basic ECL</h4>
+                        <div class="template-list">
+                            <button class="template-btn" data-template="descendants">
+                                <span class="template-name">Descendants</span>
+                                <span class="template-desc">Find all subtypes of a concept</span>
+                            </button>
+                            <button class="template-btn" data-template="ancestors">
+                                <span class="template-name">Ancestors</span>
+                                <span class="template-desc">Find all supertypes of a concept</span>
+                            </button>
+                            <button class="template-btn" data-template="children">
+                                <span class="template-name">Direct Children</span>
+                                <span class="template-desc">Find immediate children only</span>
+                            </button>
+                            <button class="template-btn" data-template="custom">
+                                <span class="template-name">Custom Query</span>
+                                <span class="template-desc">Write your own ECL expression</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Query Builder Main -->
+                <div class="builder-main">
+                    <div class="builder-panel query-description-panel">
+                        <h3><i class="fas fa-lightbulb"></i> Plain English Description</h3>
+                        <div class="description-box" id="queryDescription">
+                            <p>Select a template from the left panel to get started, or choose "Custom Query" to write your own ECL expression.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="builder-panel query-builder-panel">
+                        <h3><i class="fas fa-cogs"></i> Query Parameters</h3>
+                        <div class="builder-form" id="builderForm">
+                            <div class="form-placeholder">
+                                <i class="fas fa-arrow-left"></i>
+                                <p>Select a query template to configure parameters</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="builder-panel ecl-output-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-code"></i> Generated ECL Query</h3>
+                            <div class="panel-actions">
+                                <button class="action-btn" id="copyEcl" title="Copy to clipboard">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="ecl-display">
+                            <pre id="eclOutput"><code>// ECL query will appear here</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="query-actions">
+                        <button class="btn btn-primary btn-large" id="executeQuery">
+                            <i class="fas fa-play"></i>
+                            Execute Query
+                        </button>
+                        <button class="btn btn-secondary" id="clearQuery">
+                            <i class="fas fa-trash"></i>
+                            Clear
+                        </button>
+                    </div>
+                    
+                    <div class="builder-panel results-panel">
+                        <div class="panel-header">
+                            <h3><i class="fas fa-list-ul"></i> Results</h3>
+                            <div class="result-count" id="resultCount"></div>
+                        </div>
+                        <div class="results-container" id="resultsContainer">
+                            <div class="results-placeholder">
+                                <i class="fas fa-search"></i>
+                                <p>Execute a query to see results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> ABC of ECL</h3>
+                    <p>An interactive learning tool for SNOMED CT Expression Constraint Language, focused on medicines and clinical terminology.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="builder.html">Query Builder</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank">ECL Specification</a></li>
+                        <li><a href="https://browser.ihtsdotools.org/" target="_blank">SNOMED Browser</a></li>
+                        <li><a href="https://www.snomed.org/" target="_blank">SNOMED International</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Server</h4>
+                    <ul>
+                        <li><a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver FHIR R4</a></li>
+                        <li><a href="https://confluence.csiro.au/display/FHIR" target="_blank">CSIRO FHIR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ABC of ECL. For educational purposes. Not for clinical use.</p>
+                <p>Powered by <a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver</a> | SNOMED CT® is a trademark of SNOMED International</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Executing query...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

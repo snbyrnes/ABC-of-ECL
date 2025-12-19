@@ -897,32 +897,44 @@ function initSmoothScroll() {
 // ===== Event Listeners =====
 function initEventListeners() {
     // Theme toggle
-    elements.themeToggle.addEventListener('click', toggleTheme);
+    if (elements.themeToggle) {
+        elements.themeToggle.addEventListener('click', toggleTheme);
+    }
     
-    // Template buttons
+    // Template buttons (only on builder page)
     document.querySelectorAll('.template-btn').forEach(btn => {
         btn.addEventListener('click', () => selectTemplate(btn.dataset.template));
     });
     
-    // Execute query
-    elements.executeQuery.addEventListener('click', executeQuery);
+    // Execute query (only on builder page)
+    if (elements.executeQuery) {
+        elements.executeQuery.addEventListener('click', executeQuery);
+    }
     
-    // Clear query
-    elements.clearQuery.addEventListener('click', clearQuery);
+    // Clear query (only on builder page)
+    if (elements.clearQuery) {
+        elements.clearQuery.addEventListener('click', clearQuery);
+    }
     
-    // Copy ECL
-    elements.copyEcl.addEventListener('click', copyEclToClipboard);
+    // Copy ECL (only on builder page)
+    if (elements.copyEcl) {
+        elements.copyEcl.addEventListener('click', copyEclToClipboard);
+    }
     
-    // Example buttons
-    document.querySelectorAll('.try-btn').forEach(btn => {
+    // Example buttons (only on index page with old single-page layout)
+    document.querySelectorAll('.try-btn[data-example]').forEach(btn => {
         btn.addEventListener('click', handleExampleClick);
     });
     
-    // Mobile menu (basic toggle)
-    elements.mobileMenu.addEventListener('click', () => {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
+    // Mobile menu
+    if (elements.mobileMenu) {
+        elements.mobileMenu.addEventListener('click', () => {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            }
+        });
+    }
 }
 
 // ===== Initialization =====
@@ -931,8 +943,51 @@ function init() {
     initEventListeners();
     initSmoothScroll();
     
+    // Check for example parameter in URL (for links from examples page)
+    const urlParams = new URLSearchParams(window.location.search);
+    const exampleId = urlParams.get('example');
+    if (exampleId && EXAMPLE_QUERIES[exampleId]) {
+        setTimeout(() => {
+            loadExample(exampleId);
+        }, 100);
+    }
+    
     console.log('ABC of ECL initialized');
     console.log(`FHIR Server: ${CONFIG.fhirServer}`);
+}
+
+// Load example from URL parameter
+function loadExample(exampleId) {
+    const example = EXAMPLE_QUERIES[exampleId];
+    if (!example) return;
+    
+    if (example.ecl) {
+        selectTemplate('custom');
+        state.formParams.customEcl = example.ecl;
+        const textarea = document.getElementById('customEcl');
+        if (textarea) textarea.value = example.ecl;
+        generateEcl();
+    } else if (example.template && example.params) {
+        selectTemplate(example.template);
+        Object.assign(state.formParams, example.params);
+        
+        Object.keys(example.params).forEach(key => {
+            const input = document.getElementById(key);
+            if (input) {
+                if (key.endsWith('Term')) {
+                    const fieldId = key.replace('Term', '');
+                    const relatedInput = document.getElementById(fieldId);
+                    if (relatedInput) {
+                        relatedInput.value = example.params[key];
+                    }
+                } else {
+                    input.value = example.params[key];
+                }
+            }
+        });
+        
+        generateEcl();
+    }
 }
 
 // Start the application

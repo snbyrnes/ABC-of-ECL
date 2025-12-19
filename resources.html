@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - ABC of ECL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-code"></i>
+                ABC of ECL
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="builder.html">Query Builder</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Resources & Documentation</h2>
+                <p>Learn more about ECL and SNOMED CT</p>
+            </div>
+            
+            <div class="resources-grid">
+                <a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>ECL Specification</h4>
+                    <p>Official Expression Constraint Language specification from SNOMED International. The definitive guide to ECL syntax and semantics.</p>
+                    <span class="resource-link">View Documentation <i class="fas fa-external-link-alt"></i></span>
+                </a>
+                
+                <a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/examples/6.1-simple-expression-constraints" target="_blank" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h4>ECL Examples</h4>
+                    <p>Extensive examples of ECL expressions from simple to complex, directly from the official specification.</p>
+                    <span class="resource-link">Explore Examples <i class="fas fa-external-link-alt"></i></span>
+                </a>
+                
+                <a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/appendices/appendix-d-ecl-quick-reference" target="_blank" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-list-alt"></i>
+                    </div>
+                    <h4>Quick Reference</h4>
+                    <p>Handy quick reference guide for ECL syntax and operators. Perfect for when you need a quick reminder.</p>
+                    <span class="resource-link">View Reference <i class="fas fa-external-link-alt"></i></span>
+                </a>
+                
+                <a href="https://browser.ihtsdotools.org/" target="_blank" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h4>SNOMED CT Browser</h4>
+                    <p>Browse the SNOMED CT terminology to find concept IDs, explore hierarchies, and understand relationships.</p>
+                    <span class="resource-link">Open Browser <i class="fas fa-external-link-alt"></i></span>
+                </a>
+                
+                <a href="https://www.snomed.org/" target="_blank" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h4>SNOMED International</h4>
+                    <p>Official SNOMED International website with resources, news, and information about membership and licensing.</p>
+                    <span class="resource-link">Visit Site <i class="fas fa-external-link-alt"></i></span>
+                </a>
+                
+                <a href="https://confluence.csiro.au/display/FHIR/Ontoserver" target="_blank" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4>Ontoserver</h4>
+                    <p>Learn about the Ontoserver FHIR terminology server that powers this application's queries.</p>
+                    <span class="resource-link">Learn More <i class="fas fa-external-link-alt"></i></span>
+                </a>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="additional-resources">
+                <h3>Additional Learning Resources</h3>
+                
+                <div class="resources-list">
+                    <div class="resource-item">
+                        <div class="resource-item-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="resource-item-content">
+                            <h4>SNOMED CT E-Learning</h4>
+                            <p>Free online courses covering SNOMED CT fundamentals, including ECL.</p>
+                            <a href="https://elearning.ihtsdotools.org/" target="_blank">Access E-Learning <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-item-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="resource-item-content">
+                            <h4>SNOMED Forums</h4>
+                            <p>Community forums for asking questions and discussing SNOMED CT implementation.</p>
+                            <a href="https://forums.snomedtools.org/" target="_blank">Visit Forums <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-item-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="resource-item-content">
+                            <h4>SNOMED CT Compositional Grammar</h4>
+                            <p>Learn about the related syntax for representing SNOMED CT expressions.</p>
+                            <a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-compositional-grammar-specification/" target="_blank">View Specification <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-item-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="resource-item-content">
+                            <h4>FHIR Terminology Services</h4>
+                            <p>HL7 FHIR specification for terminology operations including ValueSet expansion with ECL.</p>
+                            <a href="https://www.hl7.org/fhir/terminology-service.html" target="_blank">View FHIR Spec <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-item">
+                        <div class="resource-item-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="resource-item-content">
+                            <h4>Australian Medicines Terminology</h4>
+                            <p>Information about AMT and how it relates to SNOMED CT drug concepts.</p>
+                            <a href="https://www.healthterminologies.gov.au/access-clinical-terminology/access-fhir-terminology-resources/" target="_blank">Learn About AMT <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FHIR Server Info -->
+            <div class="server-info">
+                <h3>About the Terminology Server</h3>
+                <div class="server-card">
+                    <div class="server-header">
+                        <i class="fas fa-server"></i>
+                        <div>
+                            <h4>CSIRO Ontoserver (FHIR R4)</h4>
+                            <code>https://r4.ontoserver.csiro.au/fhir</code>
+                        </div>
+                    </div>
+                    <p>This application uses the public CSIRO Ontoserver instance, which supports:</p>
+                    <ul>
+                        <li>SNOMED CT International Edition</li>
+                        <li>Australian Medicines Terminology (AMT)</li>
+                        <li>FHIR R4 terminology operations</li>
+                        <li>ECL query expansion via ValueSet/$expand</li>
+                    </ul>
+                    <p class="server-note"><i class="fas fa-info-circle"></i> This is a public demo server. For production use, consider setting up your own Ontoserver instance or using a licensed terminology service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> ABC of ECL</h3>
+                    <p>An interactive learning tool for SNOMED CT Expression Constraint Language, focused on medicines and clinical terminology.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="builder.html">Query Builder</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank">ECL Specification</a></li>
+                        <li><a href="https://browser.ihtsdotools.org/" target="_blank">SNOMED Browser</a></li>
+                        <li><a href="https://www.snomed.org/" target="_blank">SNOMED International</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Server</h4>
+                    <ul>
+                        <li><a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver FHIR R4</a></li>
+                        <li><a href="https://confluence.csiro.au/display/FHIR" target="_blank">CSIRO FHIR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ABC of ECL. For educational purposes. Not for clinical use.</p>
+                <p>Powered by <a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver</a> | SNOMED CT® is a trademark of SNOMED International</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples - ABC of ECL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-code"></i>
+                ABC of ECL
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="builder.html">Query Builder</a></li>
+                <li><a href="examples.html" class="active">Examples</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Examples Section -->
+    <section id="examples" class="examples-section page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Example Queries</h2>
+                <p>Learn from these practical ECL examples</p>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h4>Products containing Paracetamol</h4>
+                        <a href="builder.html?example=paracetamol" class="try-btn">Try it</a>
+                    </div>
+                    <p class="example-description">Find all medicinal products that contain paracetamol as an active ingredient.</p>
+                    <pre class="example-code"><code>&lt;&lt; 763158003 |Medicinal product| :
+  &lt;&lt; 127489000 |Has active ingredient| = 
+    &lt;&lt; 387517004 |Paracetamol|</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h4>Oral Amoxicillin Products</h4>
+                        <a href="builder.html?example=amoxicillin" class="try-btn">Try it</a>
+                    </div>
+                    <p class="example-description">Find medicinal products with amoxicillin in oral dose form.</p>
+                    <pre class="example-code"><code>&lt; 763158003 |Medicinal product| :
+  411116001 |Has dose form| = 
+    &lt;&lt; 385268001 |Oral dose form|,
+  &lt;&lt; 127489000 |Has active ingredient| = 
+    &lt;&lt; 372687004 |Amoxicillin|</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h4>Diabetes Disorders</h4>
+                        <a href="builder.html?example=diabetes" class="try-btn">Try it</a>
+                    </div>
+                    <p class="example-description">Find all types of diabetes mellitus and related conditions.</p>
+                    <pre class="example-code"><code>&lt;&lt; 73211009 |Diabetes mellitus|</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h4>Lung Disorders with Edema</h4>
+                        <a href="builder.html?example=lung-edema" class="try-btn">Try it</a>
+                    </div>
+                    <p class="example-description">Find lung disorders that have edema as the morphology.</p>
+                    <pre class="example-code"><code>&lt; 19829001 |Disorder of lung| :
+  116676008 |Associated morphology| = 
+    &lt;&lt; 79654002 |Edema|</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h4>Injectable Products</h4>
+                        <a href="builder.html?example=injectable" class="try-btn">Try it</a>
+                    </div>
+                    <p class="example-description">Find products with injection or parenteral dose forms.</p>
+                    <pre class="example-code"><code>&lt;&lt; 763158003 |Medicinal product| :
+  411116001 |Has dose form| = 
+    &lt;&lt; 385219001 |Injection dose form|</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <div class="example-header">
+                        <h4>Products Causing Reactions</h4>
+                        <a href="builder.html?example=causative" class="try-btn">Try it</a>
+                    </div>
+                    <p class="example-description">Find concepts where paracetamol is the causative agent.</p>
+                    <pre class="example-code"><code>*: 246075003 |Causative agent| = 
+  387517004 |Paracetamol|</code></pre>
+                </div>
+            </div>
+
+            <!-- ECL Syntax Examples -->
+            <div class="syntax-examples">
+                <h3>ECL Syntax Quick Reference</h3>
+                
+                <div class="syntax-grid">
+                    <div class="syntax-card">
+                        <h4>Self</h4>
+                        <p>Match only the specified concept</p>
+                        <pre><code>404684003 |Clinical finding|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Descendants</h4>
+                        <p>All subtypes of a concept</p>
+                        <pre><code>&lt; 404684003 |Clinical finding|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Descendants or Self</h4>
+                        <p>Concept plus all its subtypes</p>
+                        <pre><code>&lt;&lt; 73211009 |Diabetes mellitus|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Children</h4>
+                        <p>Direct children only (one level)</p>
+                        <pre><code>&lt;! 404684003 |Clinical finding|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Ancestors</h4>
+                        <p>All supertypes of a concept</p>
+                        <pre><code>&gt; 40541001 |Acute pulmonary edema|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Parents</h4>
+                        <p>Direct parents only (one level)</p>
+                        <pre><code>&gt;! 40541001 |Acute pulmonary edema|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Member Of</h4>
+                        <p>Concepts in a reference set</p>
+                        <pre><code>^ 700043003 |Example refset|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Any</h4>
+                        <p>Match any concept</p>
+                        <pre><code>*</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Attribute Refinement</h4>
+                        <p>Filter by attribute value</p>
+                        <pre><code>&lt; 404684003 |Clinical finding| :
+  116676008 |Associated morphology| = 
+    79654002 |Edema|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Multiple Attributes</h4>
+                        <p>Multiple conditions (AND)</p>
+                        <pre><code>&lt; 404684003 |Clinical finding| :
+  363698007 |Finding site| = &lt;&lt; 39057004 |Pulmonary valve|,
+  116676008 |Associated morphology| = &lt;&lt; 415582006 |Stenosis|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Conjunction (AND)</h4>
+                        <p>Must match both constraints</p>
+                        <pre><code>&lt; 19829001 |Disorder of lung| AND
+&lt; 301867009 |Edema of trunk|</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card">
+                        <h4>Disjunction (OR)</h4>
+                        <p>Match either constraint</p>
+                        <pre><code>&lt; 19829001 |Disorder of lung| OR
+&lt; 301867009 |Edema of trunk|</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-code"></i> ABC of ECL</h3>
+                    <p>An interactive learning tool for SNOMED CT Expression Constraint Language, focused on medicines and clinical terminology.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="builder.html">Query Builder</a></li>
+                        <li><a href="examples.html">Examples</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank">ECL Specification</a></li>
+                        <li><a href="https://browser.ihtsdotools.org/" target="_blank">SNOMED Browser</a></li>
+                        <li><a href="https://www.snomed.org/" target="_blank">SNOMED International</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Server</h4>
+                    <ul>
+                        <li><a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver FHIR R4</a></li>
+                        <li><a href="https://confluence.csiro.au/display/FHIR" target="_blank">CSIRO FHIR</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ABC of ECL. For educational purposes. Not for clinical use.</p>
+                <p>Powered by <a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver</a> | SNOMED CT® is a trademark of SNOMED International</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
