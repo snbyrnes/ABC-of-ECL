@@ -12,17 +12,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Meta descriptions and keywords on all pages
 - Open Graph tags for social sharing
 - Canonical URLs to prevent duplicate content
-- JSON-LD structured data (WebSite, SoftwareApplication, FAQPage, BreadcrumbList, HowTo schemas)
-- XML sitemap (`sitemap.xml`) for search engine crawling
-- `robots.txt` with sitemap reference
+- JSON-LD structured data for search engines
+- XML sitemap for search engine crawling
+- Robots.txt with sitemap reference
 - Google Search Console verification meta tag
 - SVG favicon with brand colors
-- Web app manifest (`manifest.json`) for installability
+- Web app manifest for installability
 - App shortcuts to Query Builder and Examples
 - Apple touch icon support
 - Skip-to-content links on all pages
 - ARIA labels on navigation and main sections
-- Semantic `<main>` landmark wrapper
+- Semantic main landmark wrapper
 
 ### Changed
 - Improved page titles with keywords for better search ranking
@@ -34,12 +34,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - ECL Query Anatomy panel with collapsible breakdown of each query component
-- Color-coded syntax items: operators (pink), concepts (green), attributes (blue), values (orange)
-- Detailed explanations for ECL operators (`<<`, `<`, `:`, `=`, `AND`, `OR`, etc.)
+- Color-coded syntax items for operators, concepts, attributes, and values
+- Detailed explanations for ECL operators
 - Knowledge base of common SNOMED CT concepts with clinical context
-- Page Guide — "How to use this page" collapsible guide on the Builder page
+- Page Guide collapsible section on the Builder page
 - Feedback section with links to GitHub Issues for bug reports
-- Enhancement roadmap (`roadmap.md`) documenting planned features
+- Enhancement roadmap documenting planned features
 
 ### Changed
 - Query Anatomy panel is collapsed by default
@@ -66,7 +66,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - ECL syntax quick reference section on Examples page
 - Additional learning resources on Resources page
 - Server information panel with Ontoserver details
-- URL parameter support for loading examples directly (`?example=paracetamol`)
+- URL parameter support for loading examples directly
 - Active navigation state highlighting
 
 ### Changed
