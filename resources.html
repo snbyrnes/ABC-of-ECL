@@ -3,14 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources - ABC of ECL</title>
+    <title>ECL Resources - SNOMED CT Documentation & Learning | ABC of ECL</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="ECL and SNOMED CT resources including operator reference, official documentation, SNOMED browser links, e-learning courses, and terminology server information. Complete ECL syntax guide.">
+    <meta name="keywords" content="ECL documentation, SNOMED CT resources, ECL operators, ECL reference, SNOMED browser, terminology server, ECL learning, SNOMED CT tutorial, ECL syntax guide, FHIR terminology">
+    <meta name="author" content="ABC of ECL">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://snbyrnes.github.io/ABC-of-ECL/resources.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ECL Resources - SNOMED CT Documentation & Learning">
+    <meta property="og:description" content="Complete ECL operator reference, links to official SNOMED CT documentation, browser tools, and learning resources for Expression Constraint Language.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://snbyrnes.github.io/ABC-of-ECL/resources.html">
+    <meta property="og:site_name" content="ABC of ECL">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "ECL Resources & Documentation",
+        "description": "Comprehensive resources for learning SNOMED CT Expression Constraint Language including operator reference, documentation links, and learning materials.",
+        "url": "https://snbyrnes.github.io/ABC-of-ECL/resources.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "ABC of ECL",
+            "url": "https://snbyrnes.github.io/ABC-of-ECL/"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://snbyrnes.github.io/ABC-of-ECL/"
+        }, {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Resources",
+            "item": "https://snbyrnes.github.io/ABC-of-ECL/resources.html"
+        }]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "ECL Operators",
+        "description": "Quick reference for SNOMED CT Expression Constraint Language operators",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "< Descendants of"},
+            {"@type": "ListItem", "position": 2, "name": "<< Descendants or self"},
+            {"@type": "ListItem", "position": 3, "name": "> Ancestors of"},
+            {"@type": "ListItem", "position": 4, "name": ">> Ancestors or self"},
+            {"@type": "ListItem", "position": 5, "name": "<! Children of"},
+            {"@type": "ListItem", "position": 6, "name": ">! Parents of"},
+            {"@type": "ListItem", "position": 7, "name": "^ Member of"},
+            {"@type": "ListItem", "position": 8, "name": ": Refinement"},
+            {"@type": "ListItem", "position": 9, "name": "AND Conjunction"},
+            {"@type": "ListItem", "position": 10, "name": "OR Disjunction"}
+        ]
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <i class="fas fa-code"></i>
@@ -31,11 +106,12 @@
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Resources Section -->
-    <section id="resources" class="resources-section page-section">
+    <section id="resources" class="resources-section page-section" aria-labelledby="resources-heading">
         <div class="container">
             <div class="section-header">
-                <h2>Resources & Documentation</h2>
+                <h2 id="resources-heading">Resources & Documentation</h2>
                 <p>Learn more about ECL and SNOMED CT</p>
             </div>
 
@@ -258,6 +334,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

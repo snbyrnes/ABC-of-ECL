@@ -1,0 +1,11 @@
+# robots.txt for ABC of ECL
+# https://snbyrnes.github.io/ABC-of-ECL/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://snbyrnes.github.io/ABC-of-ECL/sitemap.xml
+
+# Crawl-delay suggestion (optional, not all bots honor this)
+Crawl-delay: 1

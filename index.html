@@ -3,14 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABC of ECL - Learn SNOMED CT Expression Constraint Language</title>
+    <title>ABC of ECL - Learn SNOMED CT Expression Constraint Language | Interactive ECL Tutorial</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn SNOMED CT Expression Constraint Language (ECL) with our free interactive query builder. Master ECL syntax, explore medicines and clinical terminology, and execute live queries against a terminology server.">
+    <meta name="keywords" content="ECL, Expression Constraint Language, SNOMED CT, SNOMED, clinical terminology, healthcare terminology, medical coding, FHIR, terminology server, ECL tutorial, ECL query builder, medicinal products, clinical findings, healthcare IT, health informatics">
+    <meta name="author" content="ABC of ECL">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="qZl0NE8e3hfh0T5MSXH1YYseIPvrNqrt3DGCdLCdIiE" />
+    <link rel="canonical" href="https://snbyrnes.github.io/ABC-of-ECL/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ABC of ECL - Learn SNOMED CT Expression Constraint Language">
+    <meta property="og:description" content="Master ECL with our free interactive query builder. Learn to query medicines, clinical findings, and healthcare concepts using SNOMED CT Expression Constraint Language.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://snbyrnes.github.io/ABC-of-ECL/">
+    <meta property="og:site_name" content="ABC of ECL">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ABC of ECL">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ABC of ECL",
+        "description": "An interactive learning tool for SNOMED CT Expression Constraint Language (ECL), focused on medicines and clinical terminology.",
+        "url": "https://snbyrnes.github.io/ABC-of-ECL/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://snbyrnes.github.io/ABC-of-ECL/builder.html?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ABC of ECL Query Builder",
+        "description": "Interactive ECL query builder for learning SNOMED CT Expression Constraint Language with live terminology server execution.",
+        "url": "https://snbyrnes.github.io/ABC-of-ECL/builder.html",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "15+ pre-built ECL query templates",
+            "Live concept search",
+            "Real-time query execution",
+            "ECL syntax breakdown",
+            "Medicines and clinical findings queries"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://snbyrnes.github.io/ABC-of-ECL/"
+        }]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "What is ECL (Expression Constraint Language)?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ECL is a formal query language for SNOMED CT clinical terminology. It allows you to define sets of clinical concepts using operators like descendants (<<), ancestors (>>), and refinements (:) to filter by attributes."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Who should use ABC of ECL?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ABC of ECL is designed for clinical informaticians, healthcare developers, and students learning SNOMED CT. It helps you build and test ECL queries for clinical decision support, value sets, and terminology bindings."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Is ABC of ECL free to use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, ABC of ECL is 100% free and open source. It runs entirely in your browser and executes queries against a public FHIR terminology server."
+            }
+        }]
+    }
+    </script>
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
                 <i class="fas fa-code"></i>
@@ -31,8 +137,9 @@
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" aria-labelledby="hero-heading">
         <div class="hero-background">
             <div class="hero-pattern"></div>
         </div>
@@ -41,7 +148,7 @@
                 <i class="fas fa-pills"></i>
                 Medicines & Terminology
             </div>
-            <h1>Learn ECL for<br><span class="gradient-text">Healthcare Terminology</span></h1>
+            <h1 id="hero-heading">Learn ECL for<br><span class="gradient-text">Healthcare Terminology</span></h1>
             <p class="hero-description">
                 Master the SNOMED CT Expression Constraint Language (ECL) with our interactive 
                 query builder. Perfect for learners who want to understand how to query 
@@ -289,6 +396,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

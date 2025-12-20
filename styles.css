@@ -48,6 +48,27 @@
     --code-string: #fbbf24;
 }
 
+/* ===== Skip Link (Accessibility) ===== */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    z-index: 10000;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 0 0 var(--radius) 0;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--primary-dark);
+    outline-offset: 2px;
+}
+
 /* Dark Theme */
 [data-theme="dark"] {
     --background: #0f172a;
