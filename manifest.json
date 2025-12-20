@@ -1,0 +1,46 @@
+{
+  "name": "ABC of ECL - Learn SNOMED CT Expression Constraint Language",
+  "short_name": "ABC of ECL",
+  "description": "An interactive learning tool for SNOMED CT Expression Constraint Language (ECL), focused on medicines and clinical terminology.",
+  "start_url": "/ABC-of-ECL/",
+  "scope": "/ABC-of-ECL/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "categories": ["education", "medical", "utilities"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Query Builder",
+      "short_name": "Builder",
+      "description": "Open the ECL Query Builder",
+      "url": "/ABC-of-ECL/builder.html",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Examples",
+      "short_name": "Examples",
+      "description": "Browse ECL query examples",
+      "url": "/ABC-of-ECL/examples.html",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    }
+  ]
+}

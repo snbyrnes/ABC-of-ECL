@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [1.4.0] - 2025-12-20
+
+### Added
+- **SEO Improvements**
+  - Meta descriptions and keywords on all pages
+  - Open Graph tags for social sharing
+  - Canonical URLs to prevent duplicate content
+  - JSON-LD structured data (WebSite, SoftwareApplication, FAQPage, BreadcrumbList, HowTo schemas)
+  - XML sitemap (`sitemap.xml`) for search engine crawling
+  - `robots.txt` with sitemap reference
+  - Google Search Console verification meta tag
+- **PWA Support**
+  - SVG favicon with brand colors
+  - Web app manifest (`manifest.json`) for installability
+  - App shortcuts to Query Builder and Examples
+  - Apple touch icon support
+- **Accessibility Improvements**
+  - Skip-to-content links on all pages
+  - ARIA labels on navigation and main sections
+  - Semantic `<main>` landmark wrapper
+  - Heading IDs for `aria-labelledby` references
+
+### Changed
+- Improved page titles with keywords for better search ranking
+- Added skip-link CSS styling
+
+---
+
 ## [1.3.0] - 2025-12-20
 
 ### Added

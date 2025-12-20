@@ -23,6 +23,8 @@ An interactive web app for learning SNOMED CT Expression Constraint Language (EC
 - **Syntax Reference** — Quick reference cards for ECL operators
 - **Dark/Light Theme** — Toggle between themes
 - **Changelog Modal** — View version history from footer link
+- **PWA Support** — Installable as an app with offline-ready manifest
+- **SEO Optimized** — Structured data, meta tags, and sitemap for search engines
 - **Fully Static** — Runs entirely in the browser
 
 <img width="2561" height="1279" alt="image" src="https://github.com/user-attachments/assets/9f051d78-ed04-42d9-9b90-17dfae0c5a20" />
@@ -55,6 +57,10 @@ ABC-of-ECL/
 ├── resources.html      # Documentation & learning resources
 ├── styles.css          # Styles (light/dark themes)
 ├── app.js              # Application logic & FHIR integration
+├── favicon.svg         # Site favicon
+├── manifest.json       # PWA manifest for installability
+├── sitemap.xml         # XML sitemap for search engines
+├── robots.txt          # Search engine crawl instructions
 ├── CHANGELOG.md        # Version history
 ├── roadmap.md          # Enhancement roadmap
 ├── .nojekyll           # GitHub Pages config
