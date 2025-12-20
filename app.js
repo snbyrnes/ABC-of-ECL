@@ -361,7 +361,10 @@ const elements = {
     resultCount: document.getElementById('resultCount'),
     loadingOverlay: document.getElementById('loadingOverlay'),
     toast: document.getElementById('toast'),
-    toastMessage: document.getElementById('toastMessage')
+    toastMessage: document.getElementById('toastMessage'),
+    anatomyContent: document.getElementById('anatomyContent'),
+    anatomyToggle: document.getElementById('anatomyToggle'),
+    anatomyPanel: document.querySelector('.anatomy-panel')
 };
 
 // ===== Theme Management =====
@@ -710,6 +713,7 @@ function generateEcl() {
     if (!state.currentTemplate) {
         elements.eclOutput.innerHTML = '<code>// Select a template to generate ECL</code>';
         state.currentEcl = '';
+        updateAnatomyPanel('');
         return;
     }
     
@@ -718,6 +722,7 @@ function generateEcl() {
     state.currentEcl = ecl;
     
     elements.eclOutput.innerHTML = `<code>${formatEcl(ecl)}</code>`;
+    updateAnatomyPanel(ecl);
 }
 
 // ===== Query Execution =====
@@ -815,6 +820,7 @@ function clearQuery() {
         </div>
     `;
     elements.resultCount.textContent = '';
+    updateAnatomyPanel('');
 }
 
 // ===== Copy ECL =====
@@ -898,6 +904,418 @@ function initSmoothScroll() {
     });
 }
 
+// ===== ECL Query Anatomy =====
+const ECL_EXPLANATIONS = {
+    operators: {
+        '<<': {
+            name: 'Descendants or Self',
+            explanation: 'Matches the specified concept AND all of its descendants (subtypes) in the hierarchy.',
+            tip: 'Use << when you want to include the concept itself plus everything more specific beneath it.',
+            icon: 'fa-sitemap'
+        },
+        '<': {
+            name: 'Descendants',
+            explanation: 'Matches only the descendants (subtypes) of the specified concept, NOT the concept itself.',
+            tip: 'Use < when you want subtypes only, excluding the parent concept.',
+            icon: 'fa-level-down-alt'
+        },
+        '>>': {
+            name: 'Ancestors or Self',
+            explanation: 'Matches the specified concept AND all of its ancestors (supertypes) in the hierarchy.',
+            tip: 'Use >> to find the concept plus all more general concepts above it.',
+            icon: 'fa-sitemap'
+        },
+        '>': {
+            name: 'Ancestors',
+            explanation: 'Matches only the ancestors (supertypes) of the specified concept, NOT the concept itself.',
+            tip: 'Use > to navigate up the hierarchy without including the starting concept.',
+            icon: 'fa-level-up-alt'
+        },
+        '<!': {
+            name: 'Children',
+            explanation: 'Matches only the direct children (immediate subtypes) of the specified concept - one level down only.',
+            tip: 'Use <! when you need only the first level of subtypes, not the entire hierarchy beneath.',
+            icon: 'fa-chevron-down'
+        },
+        '>!': {
+            name: 'Parents',
+            explanation: 'Matches only the direct parents (immediate supertypes) of the specified concept - one level up only.',
+            tip: 'Use >! when you need only the immediate parent concepts.',
+            icon: 'fa-chevron-up'
+        },
+        '^': {
+            name: 'Member Of',
+            explanation: 'Matches concepts that are members of the specified reference set (refset).',
+            tip: 'Reference sets group concepts for specific purposes like value sets or formularies.',
+            icon: 'fa-layer-group'
+        },
+        '*': {
+            name: 'Any Concept',
+            explanation: 'Matches any concept in the terminology. Often used as a wildcard in attribute values.',
+            tip: 'Use * when you want to match any value for an attribute constraint.',
+            icon: 'fa-asterisk'
+        },
+        ':': {
+            name: 'Refinement',
+            explanation: 'Introduces attribute constraints that filter concepts based on their defining relationships.',
+            tip: 'Refinements narrow down results by specifying what attributes the concepts must have.',
+            icon: 'fa-filter'
+        },
+        '=': {
+            name: 'Equals',
+            explanation: 'The attribute value must equal (or be a subtype of, if combined with <<) the specified concept.',
+            tip: 'Use = to constrain an attribute to a specific value or value set.',
+            icon: 'fa-equals'
+        },
+        '!=': {
+            name: 'Not Equals',
+            explanation: 'The attribute value must NOT equal the specified concept.',
+            tip: 'Use != to exclude concepts with a specific attribute value.',
+            icon: 'fa-not-equal'
+        },
+        'AND': {
+            name: 'Conjunction',
+            explanation: 'Both constraints must be satisfied. Results must match the left AND right expressions.',
+            tip: 'AND narrows results - concepts must satisfy all conditions.',
+            icon: 'fa-circle-nodes'
+        },
+        'OR': {
+            name: 'Disjunction',
+            explanation: 'Either constraint can be satisfied. Results match the left OR right expression (or both).',
+            tip: 'OR broadens results - concepts need only satisfy one condition.',
+            icon: 'fa-code-branch'
+        },
+        ',': {
+            name: 'Attribute Conjunction',
+            explanation: 'Multiple attribute constraints that must all be satisfied (AND logic within refinements).',
+            tip: 'Use comma to require multiple attributes on the same concept.',
+            icon: 'fa-list-check'
+        }
+    },
+    concepts: {
+        '763158003': {
+            name: 'Medicinal product',
+            explanation: 'The root concept for all medicinal products in the SNOMED CT drug model. Includes clinical drugs, pharmaceutical products, and packaged medicines.',
+            category: 'Medicines'
+        },
+        '373873005': {
+            name: 'Pharmaceutical / biologic product',
+            explanation: 'Products containing pharmaceutical or biological substances for therapeutic use.',
+            category: 'Medicines'
+        },
+        '105590001': {
+            name: 'Substance',
+            explanation: 'Chemical or biological substances, including active pharmaceutical ingredients.',
+            category: 'Substances'
+        },
+        '127489000': {
+            name: 'Has active ingredient',
+            explanation: 'Links a medicinal product to its active pharmaceutical substance(s).',
+            category: 'Drug Attribute',
+            isAttribute: true
+        },
+        '411116001': {
+            name: 'Has manufactured dose form',
+            explanation: 'Specifies the physical form of the medication (tablet, capsule, injection, etc.).',
+            category: 'Drug Attribute',
+            isAttribute: true
+        },
+        '736542009': {
+            name: 'Pharmaceutical dose form',
+            explanation: 'The physical form in which a drug is manufactured and dispensed.',
+            category: 'Dose Forms'
+        },
+        '385055001': {
+            name: 'Tablet dose form',
+            explanation: 'Solid dose form made by compressing drug substances.',
+            category: 'Dose Forms'
+        },
+        '385049006': {
+            name: 'Capsule dose form',
+            explanation: 'Solid dose form with drug enclosed in a shell (hard or soft).',
+            category: 'Dose Forms'
+        },
+        '385268001': {
+            name: 'Oral dose form',
+            explanation: 'Any dose form administered via the mouth (tablets, capsules, liquids, etc.).',
+            category: 'Dose Forms'
+        },
+        '385219001': {
+            name: 'Injection dose form',
+            explanation: 'Dose forms administered by injection (IV, IM, SC, etc.).',
+            category: 'Dose Forms'
+        },
+        '404684003': {
+            name: 'Clinical finding',
+            explanation: 'Root concept for clinical observations including disorders, diseases, and symptoms.',
+            category: 'Clinical'
+        },
+        '64572001': {
+            name: 'Disease',
+            explanation: 'Pathological conditions with identifiable signs and symptoms.',
+            category: 'Clinical'
+        },
+        '71388002': {
+            name: 'Procedure',
+            explanation: 'Root concept for clinical procedures, interventions, and therapies.',
+            category: 'Procedures'
+        },
+        '363698007': {
+            name: 'Finding site',
+            explanation: 'Links a clinical finding to the body site where it occurs.',
+            category: 'Clinical Attribute',
+            isAttribute: true
+        },
+        '116676008': {
+            name: 'Associated morphology',
+            explanation: 'Links a clinical finding to its underlying morphological abnormality.',
+            category: 'Clinical Attribute',
+            isAttribute: true
+        },
+        '246075003': {
+            name: 'Causative agent',
+            explanation: 'Links a condition to the substance or organism that caused it.',
+            category: 'Clinical Attribute',
+            isAttribute: true
+        },
+        '91723000': {
+            name: 'Anatomical structure',
+            explanation: 'Body structures and anatomical locations.',
+            category: 'Body Structure'
+        },
+        '387517004': {
+            name: 'Paracetamol',
+            explanation: 'Common analgesic and antipyretic substance (also known as acetaminophen).',
+            category: 'Substance'
+        },
+        '372687004': {
+            name: 'Amoxicillin',
+            explanation: 'Beta-lactam antibiotic commonly used for bacterial infections.',
+            category: 'Substance'
+        },
+        '73211009': {
+            name: 'Diabetes mellitus',
+            explanation: 'Metabolic disorder characterized by high blood glucose levels.',
+            category: 'Clinical Finding'
+        },
+        '363704007': {
+            name: 'Procedure site',
+            explanation: 'Links a procedure to the body site where it is performed.',
+            category: 'Procedure Attribute',
+            isAttribute: true
+        }
+    }
+};
+
+function parseEclForAnatomy(ecl) {
+    if (!ecl || ecl.trim() === '') return [];
+    
+    const parts = [];
+    let remaining = ecl.trim();
+    
+    // Pattern to match ECL components
+    const patterns = [
+        // Operators (order matters - longer first)
+        { type: 'operator', regex: /^(<<|>>|<!|>!|<|>|\^|\*|!=|=|:|AND|OR|,)/, category: 'operator' },
+        // Concept with term: 123456789 |Term here|
+        { type: 'concept', regex: /^(\d{6,18})\s*\|([^|]+)\|/, category: 'concept' },
+        // Concept ID only: 123456789
+        { type: 'concept', regex: /^(\d{6,18})/, category: 'concept' },
+        // Whitespace (skip)
+        { type: 'whitespace', regex: /^\s+/, skip: true },
+        // Parentheses
+        { type: 'grouping', regex: /^[()]/, category: 'grouping' }
+    ];
+    
+    while (remaining.length > 0) {
+        let matched = false;
+        
+        for (const pattern of patterns) {
+            const match = remaining.match(pattern.regex);
+            if (match) {
+                if (!pattern.skip) {
+                    const part = {
+                        type: pattern.type,
+                        raw: match[0],
+                        value: match[1] || match[0],
+                        term: match[2] || null
+                    };
+                    parts.push(part);
+                }
+                remaining = remaining.substring(match[0].length);
+                matched = true;
+                break;
+            }
+        }
+        
+        if (!matched) {
+            // Skip unrecognized character
+            remaining = remaining.substring(1);
+        }
+    }
+    
+    return parts;
+}
+
+function generateAnatomyHtml(parts) {
+    if (parts.length === 0) {
+        return `
+            <div class="anatomy-placeholder">
+                <i class="fas fa-lightbulb"></i>
+                <p>Select a template to see a breakdown of how the ECL query works</p>
+            </div>
+        `;
+    }
+    
+    let html = '<div class="anatomy-breakdown">';
+    let context = 'focus'; // Can be: focus, refinement, value
+    let lastOperator = null;
+    
+    parts.forEach((part, index) => {
+        if (part.type === 'operator') {
+            const opInfo = ECL_EXPLANATIONS.operators[part.value];
+            if (opInfo) {
+                // Update context based on operator
+                if (part.value === ':') {
+                    context = 'refinement';
+                    html += '<div class="anatomy-divider"><span>Refinement</span></div>';
+                } else if (part.value === '=') {
+                    context = 'value';
+                }
+                
+                // Skip rendering = and , as separate items for cleaner display
+                if (part.value !== '=' && part.value !== ',') {
+                    html += `
+                        <div class="anatomy-item operator">
+                            <div class="anatomy-icon">
+                                <i class="fas ${opInfo.icon}"></i>
+                            </div>
+                            <div class="anatomy-details">
+                                <div class="anatomy-label">${opInfo.name}</div>
+                                <div class="anatomy-code">${escapeHtml(part.raw)}</div>
+                                <div class="anatomy-explanation">${opInfo.explanation}</div>
+                                ${opInfo.tip ? `<div class="anatomy-tip"><i class="fas fa-lightbulb"></i> ${opInfo.tip}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+                lastOperator = part.value;
+            }
+        } else if (part.type === 'concept') {
+            const conceptInfo = ECL_EXPLANATIONS.concepts[part.value];
+            const displayTerm = part.term || (conceptInfo ? conceptInfo.name : 'Concept');
+            const isAttribute = conceptInfo?.isAttribute || false;
+            
+            // Determine item type for styling
+            let itemType = 'concept';
+            if (context === 'refinement' && isAttribute) {
+                itemType = 'attribute';
+            } else if (context === 'value' || lastOperator === '=') {
+                itemType = 'value';
+                context = 'refinement'; // Reset for next attribute
+            }
+            
+            const explanation = conceptInfo 
+                ? conceptInfo.explanation 
+                : `SNOMED CT concept representing "${displayTerm}".`;
+            
+            const category = conceptInfo?.category || 'Concept';
+            
+            html += `
+                <div class="anatomy-item ${itemType}">
+                    <div class="anatomy-icon">
+                        <i class="fas ${isAttribute ? 'fa-link' : 'fa-cube'}"></i>
+                    </div>
+                    <div class="anatomy-details">
+                        <div class="anatomy-label">${category}${isAttribute ? ' (Attribute)' : ''}</div>
+                        <div class="anatomy-code">${part.value} |${escapeHtml(displayTerm)}|</div>
+                        <div class="anatomy-explanation">${explanation}</div>
+                    </div>
+                </div>
+            `;
+            
+            // Reset lastOperator after value
+            if (itemType === 'value') {
+                lastOperator = null;
+            }
+        }
+    });
+    
+    html += '</div>';
+    return html;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function updateAnatomyPanel(ecl) {
+    if (!elements.anatomyContent) return;
+    
+    if (!ecl || ecl.trim() === '') {
+        elements.anatomyContent.innerHTML = `
+            <div class="anatomy-placeholder">
+                <i class="fas fa-lightbulb"></i>
+                <p>Select a template to see a breakdown of how the ECL query works</p>
+            </div>
+        `;
+        return;
+    }
+    
+    const parts = parseEclForAnatomy(ecl);
+    const html = generateAnatomyHtml(parts);
+    elements.anatomyContent.innerHTML = html;
+}
+
+function initAnatomyPanel() {
+    if (elements.anatomyToggle && elements.anatomyPanel) {
+        elements.anatomyToggle.addEventListener('click', () => {
+            elements.anatomyPanel.classList.toggle('collapsed');
+        });
+        
+        // Also allow clicking the header
+        const header = elements.anatomyPanel.querySelector('.anatomy-header');
+        if (header) {
+            header.addEventListener('click', (e) => {
+                if (e.target !== elements.anatomyToggle && !elements.anatomyToggle.contains(e.target)) {
+                    elements.anatomyPanel.classList.toggle('collapsed');
+                }
+            });
+        }
+    }
+}
+
+function initPageGuide() {
+    const guideToggle = document.getElementById('guideToggle');
+    const guideHeader = document.getElementById('guideHeader');
+    const pageGuide = document.querySelector('.page-guide');
+    
+    if (guideToggle && pageGuide) {
+        // Check if user has previously collapsed the guide
+        const guideCollapsed = localStorage.getItem('guideCollapsed') === 'true';
+        if (guideCollapsed) {
+            pageGuide.classList.add('collapsed');
+        }
+        
+        guideToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            pageGuide.classList.toggle('collapsed');
+            localStorage.setItem('guideCollapsed', pageGuide.classList.contains('collapsed'));
+        });
+        
+        if (guideHeader) {
+            guideHeader.addEventListener('click', (e) => {
+                if (e.target !== guideToggle && !guideToggle.contains(e.target)) {
+                    pageGuide.classList.toggle('collapsed');
+                    localStorage.setItem('guideCollapsed', pageGuide.classList.contains('collapsed'));
+                }
+            });
+        }
+    }
+}
+
 // ===== Event Listeners =====
 function initEventListeners() {
     // Theme toggle
@@ -946,6 +1364,8 @@ function init() {
     initTheme();
     initEventListeners();
     initSmoothScroll();
+    initAnatomyPanel();
+    initPageGuide();
     
     // Check for example parameter in URL (for links from examples page)
     const urlParams = new URLSearchParams(window.location.search);

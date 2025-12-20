@@ -684,14 +684,14 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 24px;
     color: var(--text-muted);
     text-align: center;
 }
 
 .form-placeholder i {
-    font-size: 2rem;
-    margin-bottom: 12px;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
 }
 
 .form-group {
@@ -1163,6 +1163,67 @@ select.form-control {
     gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* ===== Feedback Section ===== */
+.feedback-section {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 32px;
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    border: 2px dashed var(--border-color);
+}
+
+.feedback-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--accent-color), #f97316);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.feedback-icon i {
+    font-size: 1.75rem;
+    color: white;
+}
+
+.feedback-content {
+    flex: 1;
+}
+
+.feedback-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.feedback-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.feedback-content .btn {
+    display: inline-flex;
+}
+
+@media (max-width: 768px) {
+    .feedback-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .feedback-content .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* ===== Nav Active State ===== */
@@ -1690,6 +1751,341 @@ a.try-btn {
     .query-actions {
         flex-direction: column;
     }
+}
+
+/* ===== Page Guide ===== */
+.page-guide {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 165, 233, 0.08));
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-xl);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.guide-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: var(--transition);
+}
+
+.guide-header:hover {
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.guide-header i:first-child {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.guide-header span {
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.guide-toggle {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: var(--surface);
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.guide-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.guide-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.page-guide.collapsed .guide-toggle i {
+    transform: rotate(180deg);
+}
+
+.guide-content {
+    padding: 0 20px 20px;
+    transition: all 0.3s ease;
+}
+
+.page-guide.collapsed .guide-content {
+    display: none;
+}
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.guide-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.guide-item:hover {
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.guide-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.guide-icon i {
+    color: white;
+    font-size: 0.9rem;
+}
+
+.guide-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.guide-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.guide-text p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ===== ECL Query Anatomy Panel ===== */
+.anatomy-panel {
+    border: 2px solid var(--primary-color);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(14, 165, 233, 0.03));
+}
+
+.anatomy-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.anatomy-toggle {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: var(--background-secondary);
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.anatomy-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.anatomy-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.anatomy-panel.collapsed .anatomy-toggle i {
+    transform: rotate(-90deg);
+}
+
+.anatomy-content {
+    padding: 20px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.anatomy-panel.collapsed .anatomy-content {
+    display: none;
+}
+
+.anatomy-placeholder {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-muted);
+}
+
+.anatomy-placeholder i {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    color: var(--primary-light);
+}
+
+.anatomy-placeholder p {
+    font-size: 0.95rem;
+}
+
+/* Anatomy breakdown items */
+.anatomy-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.anatomy-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition);
+}
+
+.anatomy-item:hover {
+    background: var(--background-secondary);
+    transform: translateX(4px);
+}
+
+.anatomy-item.operator {
+    border-left-color: var(--code-keyword);
+}
+
+.anatomy-item.concept {
+    border-left-color: var(--code-number);
+}
+
+.anatomy-item.attribute {
+    border-left-color: var(--secondary-color);
+}
+
+.anatomy-item.value {
+    border-left-color: var(--accent-color);
+}
+
+.anatomy-item.conjunction {
+    border-left-color: var(--info);
+}
+
+.anatomy-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+.anatomy-item.operator .anatomy-icon {
+    background: rgba(244, 114, 182, 0.15);
+    color: var(--code-keyword);
+}
+
+.anatomy-item.concept .anatomy-icon {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--code-number);
+}
+
+.anatomy-item.attribute .anatomy-icon {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--secondary-color);
+}
+
+.anatomy-item.value .anatomy-icon {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--accent-color);
+}
+
+.anatomy-item.conjunction .anatomy-icon {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--info);
+}
+
+.anatomy-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.anatomy-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+.anatomy-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.anatomy-explanation {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.anatomy-tip {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.anatomy-tip i {
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Anatomy section divider */
+.anatomy-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.anatomy-divider::before,
+.anatomy-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
 }
 
 /* ===== Scrollbar ===== */

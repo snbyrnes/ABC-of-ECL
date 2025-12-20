@@ -29,6 +29,8 @@ Expression Constraint Language (ECL) is a formal syntax for querying SNOMED CT c
 - **15+ Query Templates** — Pre-built templates for medicines, clinical findings, and procedures
 - **Live Concept Search** — Search SNOMED CT concepts in real-time
 - **Plain English Descriptions** — Understand what each query does before running it
+- **ECL Query Anatomy** — Interactive breakdown explaining each part of the ECL syntax
+- **Page Guide** — Collapsible guide explaining how to use each section
 - **ECL Generation** — Watch queries build as you configure parameters
 - **Real Results** — Execute against CSIRO Ontoserver FHIR API
 - **Syntax Reference** — Quick reference cards for ECL operators
@@ -65,11 +67,21 @@ ABC-of-ECL/
 ├── styles.css          # Styles (light/dark themes)
 ├── app.js              # Application logic & FHIR integration
 ├── CHANGELOG.md        # Version history
+├── roadmap.md          # Enhancement roadmap
 ├── .nojekyll           # GitHub Pages config
 └── .github/
     └── workflows/
         └── deploy.yml  # GitHub Actions deployment
 ```
+
+---
+
+## Contributing
+
+This project is under active development and welcomes feedback! 
+
+- 🐛 **Report bugs** or suggest features: [GitHub Issues](https://github.com/snbyrnes/ABC-of-ECL/issues)
+- 📋 **View the roadmap**: See [roadmap.md](roadmap.md) for planned enhancements
 
 ---
 

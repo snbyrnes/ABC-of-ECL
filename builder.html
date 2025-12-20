@@ -132,6 +132,63 @@
                 
                 <!-- Query Builder Main -->
                 <div class="builder-main">
+                    <!-- Page Guide -->
+                    <div class="page-guide">
+                        <div class="guide-header" id="guideHeader">
+                            <i class="fas fa-info-circle"></i>
+                            <span>How to use this page</span>
+                            <button class="guide-toggle" id="guideToggle">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="guide-content" id="guideContent">
+                            <div class="guide-grid">
+                                <div class="guide-item">
+                                    <div class="guide-icon"><i class="fas fa-list"></i></div>
+                                    <div class="guide-text">
+                                        <strong>Query Templates</strong>
+                                        <p>Choose a pre-built query pattern from the sidebar. Each template is designed for a specific use case like finding products by ingredient or filtering by dose form.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-item">
+                                    <div class="guide-icon"><i class="fas fa-lightbulb"></i></div>
+                                    <div class="guide-text">
+                                        <strong>Plain English Description</strong>
+                                        <p>A human-readable explanation of what the query will do. This helps you understand the intent before diving into the technical ECL syntax.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-item">
+                                    <div class="guide-icon"><i class="fas fa-cogs"></i></div>
+                                    <div class="guide-text">
+                                        <strong>Query Parameters</strong>
+                                        <p>Configure the specific values for your query. Search for concepts (like ingredients or dose forms) to customise the ECL expression.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-item">
+                                    <div class="guide-icon"><i class="fas fa-code"></i></div>
+                                    <div class="guide-text">
+                                        <strong>Generated ECL Query</strong>
+                                        <p>The actual ECL syntax that will be sent to the terminology server. This is the expression you could use in your own systems.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-item">
+                                    <div class="guide-icon"><i class="fas fa-microscope"></i></div>
+                                    <div class="guide-text">
+                                        <strong>Query Anatomy</strong>
+                                        <p>A detailed breakdown of each component in the ECL query. Learn what each operator, concept ID, and attribute means and why it's used.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-item">
+                                    <div class="guide-icon"><i class="fas fa-list-ul"></i></div>
+                                    <div class="guide-text">
+                                        <strong>Results</strong>
+                                        <p>The SNOMED CT concepts returned by your query. Each result shows the concept ID and preferred term from the terminology server.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="builder-panel query-description-panel">
                         <h3><i class="fas fa-lightbulb"></i> Plain English Description</h3>
                         <div class="description-box" id="queryDescription">
@@ -160,6 +217,22 @@
                         </div>
                         <div class="ecl-display">
                             <pre id="eclOutput"><code>// ECL query will appear here</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- ECL Query Anatomy Panel -->
+                    <div class="builder-panel anatomy-panel collapsed">
+                        <div class="panel-header anatomy-header">
+                            <h3><i class="fas fa-microscope"></i> Query Anatomy</h3>
+                            <button class="anatomy-toggle" id="anatomyToggle" title="Toggle explanation">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="anatomy-content" id="anatomyContent">
+                            <div class="anatomy-placeholder">
+                                <i class="fas fa-lightbulb"></i>
+                                <p>Select a template to see a breakdown of how the ECL query works</p>
+                            </div>
                         </div>
                     </div>
                     

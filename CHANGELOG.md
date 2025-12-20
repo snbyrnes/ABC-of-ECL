@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [1.3.0] - 2025-12-20
+
+### Added
+- **ECL Query Anatomy Panel** — Collapsible panel that breaks down each ECL query component with explanations
+  - Color-coded items: operators (pink), concepts (green), attributes (blue), values (orange)
+  - Detailed explanations for ECL operators (`<<`, `<`, `:`, `=`, `AND`, `OR`, etc.)
+  - Knowledge base of common SNOMED CT concepts with clinical context
+  - Practical tips for when to use each operator
+- **Page Guide** — "How to use this page" collapsible guide on the Builder page
+  - Explains each section: Templates, Description, Parameters, ECL Output, Anatomy, Results
+  - Remembers collapsed state in localStorage
+- **Feedback Section** — "Project Under Development" section on home page
+  - Links to GitHub Issues for bug reports and suggestions
+- **Enhancement Roadmap** — New `roadmap.md` documenting planned features
+
+### Changed
+- Query Anatomy panel is collapsed by default
+- Reduced height of empty Query Parameters placeholder
+
+---
+
 ## [1.2.0] - 2025-12-19
 
 ### Added
