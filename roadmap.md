@@ -74,9 +74,9 @@ Architect the app for multiple national terminology servers.
 |---------|--------|----------|
 | 🇦🇺 Australia | CSIRO Ontoserver | `https://r4.ontoserver.csiro.au/fhir` |
 | 🇬🇧 UK | NHS Terminology Server | TBD |
-| 🇮🇪 Ireland | HIQA NTS | TBD |
-| 🇨🇦 Canada | Infoway Terminology Gateway | TBD |
-| 🌍 International | SNOMED Browser API | TBD |
+| 🇮🇪 Ireland | HSE NMPC FHIR Server | TBD |
+| 🇨🇦 Canada | Infoway Gateway | TBD |
+| 🌍 International | SNOMED Snowstorm API | TBD |
 
 ### Considerations
 - Different national extensions have different drug models
