@@ -38,6 +38,84 @@
                 <h2>Resources & Documentation</h2>
                 <p>Learn more about ECL and SNOMED CT</p>
             </div>
+
+            <!-- ECL Operators Reference -->
+            <div id="operators" class="ecl-operators-section">
+                <h3><i class="fas fa-code"></i> ECL Operators Quick Reference</h3>
+                <p class="operators-intro">These are the core operators used in Expression Constraint Language. Click on any operator to see it used in the Query Builder.</p>
+                <div class="operator-grid">
+                    <div class="operator-item">
+                        <code>&lt;</code>
+                        <span>Descendants of</span>
+                        <small>All subtypes, excluding self</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>&lt;&lt;</code>
+                        <span>Descendants or self</span>
+                        <small>All subtypes, including self</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>&gt;</code>
+                        <span>Ancestors of</span>
+                        <small>All supertypes, excluding self</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>&gt;&gt;</code>
+                        <span>Ancestors or self</span>
+                        <small>All supertypes, including self</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>&lt;!</code>
+                        <span>Children of</span>
+                        <small>Direct subtypes only (1 level)</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>&gt;!</code>
+                        <span>Parents of</span>
+                        <small>Direct supertypes only (1 level)</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>^</code>
+                        <span>Member of</span>
+                        <small>Concepts in a reference set</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>*</code>
+                        <span>Any concept</span>
+                        <small>Wildcard - matches anything</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>:</code>
+                        <span>Refinement</span>
+                        <small>Filter by attributes</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>=</code>
+                        <span>Equals</span>
+                        <small>Attribute value constraint</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>AND</code>
+                        <span>Conjunction</span>
+                        <small>Must match both constraints</small>
+                    </div>
+                    <div class="operator-item">
+                        <code>OR</code>
+                        <span>Disjunction</span>
+                        <small>Match either constraint</small>
+                    </div>
+                </div>
+                <div class="operators-cta">
+                    <a href="builder.html" class="btn btn-primary">
+                        <i class="fas fa-hammer"></i>
+                        Try These Operators
+                    </a>
+                    <a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/appendices/appendix-d-ecl-quick-reference" target="_blank" class="btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Official ECL Reference
+                    </a>
+                </div>
+            </div>
             
             <div class="resources-grid">
                 <a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank" class="resource-card">
