@@ -9,24 +9,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [1.4.0] - 2025-12-20
 
 ### Added
-- **SEO Improvements**
-  - Meta descriptions and keywords on all pages
-  - Open Graph tags for social sharing
-  - Canonical URLs to prevent duplicate content
-  - JSON-LD structured data (WebSite, SoftwareApplication, FAQPage, BreadcrumbList, HowTo schemas)
-  - XML sitemap (`sitemap.xml`) for search engine crawling
-  - `robots.txt` with sitemap reference
-  - Google Search Console verification meta tag
-- **PWA Support**
-  - SVG favicon with brand colors
-  - Web app manifest (`manifest.json`) for installability
-  - App shortcuts to Query Builder and Examples
-  - Apple touch icon support
-- **Accessibility Improvements**
-  - Skip-to-content links on all pages
-  - ARIA labels on navigation and main sections
-  - Semantic `<main>` landmark wrapper
-  - Heading IDs for `aria-labelledby` references
+- Meta descriptions and keywords on all pages
+- Open Graph tags for social sharing
+- Canonical URLs to prevent duplicate content
+- JSON-LD structured data (WebSite, SoftwareApplication, FAQPage, BreadcrumbList, HowTo schemas)
+- XML sitemap (`sitemap.xml`) for search engine crawling
+- `robots.txt` with sitemap reference
+- Google Search Console verification meta tag
+- SVG favicon with brand colors
+- Web app manifest (`manifest.json`) for installability
+- App shortcuts to Query Builder and Examples
+- Apple touch icon support
+- Skip-to-content links on all pages
+- ARIA labels on navigation and main sections
+- Semantic `<main>` landmark wrapper
 
 ### Changed
 - Improved page titles with keywords for better search ranking
@@ -37,17 +33,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [1.3.0] - 2025-12-20
 
 ### Added
-- **ECL Query Anatomy Panel** — Collapsible panel that breaks down each ECL query component with explanations
-  - Color-coded items: operators (pink), concepts (green), attributes (blue), values (orange)
-  - Detailed explanations for ECL operators (`<<`, `<`, `:`, `=`, `AND`, `OR`, etc.)
-  - Knowledge base of common SNOMED CT concepts with clinical context
-  - Practical tips for when to use each operator
-- **Page Guide** — "How to use this page" collapsible guide on the Builder page
-  - Explains each section: Templates, Description, Parameters, ECL Output, Anatomy, Results
-  - Remembers collapsed state in localStorage
-- **Feedback Section** — "Project Under Development" section on home page
-  - Links to GitHub Issues for bug reports and suggestions
-- **Enhancement Roadmap** — New `roadmap.md` documenting planned features
+- ECL Query Anatomy panel with collapsible breakdown of each query component
+- Color-coded syntax items: operators (pink), concepts (green), attributes (blue), values (orange)
+- Detailed explanations for ECL operators (`<<`, `<`, `:`, `=`, `AND`, `OR`, etc.)
+- Knowledge base of common SNOMED CT concepts with clinical context
+- Page Guide — "How to use this page" collapsible guide on the Builder page
+- Feedback section with links to GitHub Issues for bug reports
+- Enhancement roadmap (`roadmap.md`) documenting planned features
 
 ### Changed
 - Query Anatomy panel is collapsed by default
