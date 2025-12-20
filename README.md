@@ -103,11 +103,6 @@ To deploy your own:
 - [SNOMED CT Browser](https://browser.ihtsdotools.org/)
 - [Ontoserver Documentation](https://confluence.csiro.au/display/FHIR/Ontoserver)
 
----
-
-## License
-
-MIT — Free for educational and commercial use.
 
 ---
 
