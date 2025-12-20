@@ -6,6 +6,8 @@ An interactive web app for learning SNOMED CT Expression Constraint Language (EC
 
 ![ECL Query Builder](https://img.shields.io/badge/SNOMED-ECL-blue) ![GitHub Pages](https://img.shields.io/badge/Hosted-GitHub%20Pages-green) ![License](https://img.shields.io/badge/License-Apache_2.0-yellow)
 
+<img width="2690" height="1416" alt="image" src="https://github.com/user-attachments/assets/9932a124-28b7-498c-a91d-be544cbfe3c8" />
+
 ---
 
 ## What is ECL?
@@ -37,6 +39,8 @@ Expression Constraint Language (ECL) is a formal syntax for querying SNOMED CT c
 - **Dark/Light Theme** — Toggle between themes
 - **Changelog Modal** — View version history from footer link
 - **Fully Static** — Runs entirely in the browser
+
+<img width="2561" height="1279" alt="image" src="https://github.com/user-attachments/assets/9f051d78-ed04-42d9-9b90-17dfae0c5a20" />
 
 ---
 
