@@ -10,21 +10,6 @@ An interactive web app for learning SNOMED CT Expression Constraint Language (EC
 
 ---
 
-## What is ECL?
-
-Expression Constraint Language (ECL) is a formal syntax for querying SNOMED CT clinical terminology. It allows you to define sets of clinical concepts using operators like:
-
-| Operator | Meaning |
-|----------|---------|
-| `<` | Descendants of |
-| `<<` | Descendants or self |
-| `>` | Ancestors of |
-| `>>` | Ancestors or self |
-| `:` | Refinement (with attributes) |
-| `^` | Member of reference set |
-
----
-
 ## Features
 
 - **Multi-Page Site** — Dedicated pages for Home, Builder, Examples, and Resources
