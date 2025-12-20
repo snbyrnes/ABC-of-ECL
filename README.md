@@ -4,7 +4,7 @@ An interactive web app for learning SNOMED CT Expression Constraint Language (EC
 
 🔗 **Live Demo:** [snbyrnes.github.io/ABC-of-ECL](https://snbyrnes.github.io/ABC-of-ECL/)
 
-![ECL Query Builder](https://img.shields.io/badge/SNOMED-ECL-blue) ![GitHub Pages](https://img.shields.io/badge/Hosted-GitHub%20Pages-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
+![ECL Query Builder](https://img.shields.io/badge/SNOMED-ECL-blue) ![GitHub Pages](https://img.shields.io/badge/Hosted-GitHub%20Pages-green) ![License](https://img.shields.io/badge/License-Apache_2.0-yellow)
 
 ---
 
