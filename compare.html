@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECL Query Builder - Build &amp; Test SNOMED CT Queries | ABC of ECL</title>
+    <title>Compare ECL Queries - See What an Operator Changes | ABC of ECL</title>
 
-    <meta name="description" content="Build and test SNOMED CT ECL queries interactively against a live FHIR terminology server. Templates for the Irish NMPC drug model, clinical findings and procedures, with a breakdown of every part of the query.">
-    <meta name="keywords" content="ECL query builder, SNOMED CT query, Expression Constraint Language, NMPC, VTM VMP AMP, FHIR terminology, ECL syntax">
+    <meta name="description" content="Run two SNOMED CT ECL expressions side by side and see exactly which concepts each one selects. The fastest way to understand what an operator actually does.">
+    <meta name="keywords" content="compare ECL, ECL operators, SNOMED CT, descendants vs children, expression constraint language, set difference">
     <meta name="author" content="ABC of ECL">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://snbyrnes.github.io/ABC-of-ECL/builder.html">
+    <link rel="canonical" href="https://snbyrnes.github.io/ABC-of-ECL/compare.html">
 
-    <meta property="og:title" content="ECL Query Builder - Build &amp; Test SNOMED CT Queries">
-    <meta property="og:description" content="Interactive ECL query builder with live execution, a query anatomy breakdown and shareable links.">
+    <meta property="og:title" content="Compare ECL Queries - See What an Operator Changes">
+    <meta property="og:description" content="Run two ECL expressions side by side and see which concepts each one selects, and which they share.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://snbyrnes.github.io/ABC-of-ECL/builder.html">
+    <meta property="og:url" content="https://snbyrnes.github.io/ABC-of-ECL/compare.html">
     <meta property="og:site_name" content="ABC of ECL">
     <meta property="og:image" content="https://snbyrnes.github.io/ABC-of-ECL/og-image.png">
     <meta property="og:image:width" content="1200">
@@ -53,22 +53,10 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "ECL Query Builder",
-        "description": "Interactive tool for building and testing SNOMED CT Expression Constraint Language queries with live execution against a terminology server.",
-        "url": "https://snbyrnes.github.io/ABC-of-ECL/builder.html",
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "Web Browser",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://snbyrnes.github.io/ABC-of-ECL/" },
-            { "@type": "ListItem", "position": 2, "name": "Query Builder", "item": "https://snbyrnes.github.io/ABC-of-ECL/builder.html" }
+            { "@type": "ListItem", "position": 2, "name": "Compare", "item": "https://snbyrnes.github.io/ABC-of-ECL/compare.html" }
         ]
     }
     </script>
@@ -84,8 +72,8 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="builder.html" class="active" aria-current="page">Query Builder</a></li>
-                <li><a href="compare.html">Compare</a></li>
+                <li><a href="builder.html">Query Builder</a></li>
+                <li><a href="compare.html" class="active" aria-current="page">Compare</a></li>
                 <li><a href="examples.html">Examples</a></li>
                 <li><a href="resources.html">Resources</a></li>
             </ul>
@@ -106,102 +94,53 @@
     <!-- @endpartial -->
 
     <main id="main-content">
-    <section id="builder" class="builder-section page-section" aria-labelledby="builder-heading">
+    <section class="compare-section page-section" aria-labelledby="compare-heading">
         <div class="container">
             <div class="section-header">
-                <h2 id="builder-heading">ECL Query Builder</h2>
-                <p>Pick a template, adjust it, and watch the expression and the results change together</p>
+                <h2 id="compare-heading">Compare Two Queries</h2>
+                <p>Reading that <code>&lt;</code> excludes the concept itself is abstract. Seeing the one concept it drops is not.</p>
             </div>
 
-            <p class="server-notice" id="serverNotice"></p>
+            <div class="preset-row">
+                <h3>Start from a question</h3>
+                <div class="preset-list" id="presetList"></div>
+            </div>
 
-            <div class="builder-layout">
-                <aside class="builder-sidebar" aria-label="Query templates">
-                    <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-list"/></svg> Templates</h3>
-                    <p class="sidebar-description">Each template generates real ECL. Change the parameters to see the expression update.</p>
-                    <div id="templateList"></div>
-                </aside>
-
-                <div class="builder-main">
-                    <div class="builder-panel query-description-panel">
-                        <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-lightbulb"/></svg> What this query does</h3>
-                        <div class="description-box" id="queryDescription"></div>
-                    </div>
-
-                    <div class="builder-panel query-builder-panel">
-                        <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-sliders"/></svg> Parameters</h3>
-                        <div class="builder-form" id="builderForm"></div>
-                    </div>
-
-                    <div class="builder-panel ecl-output-panel">
-                        <div class="panel-header">
-                            <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-code"/></svg> Generated ECL</h3>
-                            <div class="panel-actions">
-                                <button class="action-btn" id="copyEcl" type="button" title="Copy the expression">
-                                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-copy"/></svg><span class="sr-only">Copy ECL</span>
-                                </button>
-                                <button class="action-btn" id="copyLink" type="button" title="Copy a shareable link to this query">
-                                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-link"/></svg><span class="sr-only">Copy shareable link</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="ecl-display"><pre id="eclOutput"></pre></div>
-                    </div>
-
-                    <div class="builder-panel anatomy-panel">
-                        <div class="panel-header anatomy-header">
-                            <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-microscope"/></svg> Query anatomy</h3>
-                            <button class="anatomy-toggle" id="anatomyToggle" type="button"
-                                    aria-expanded="true" aria-controls="anatomyContent" title="Toggle the breakdown">
-                                <svg class="icon" aria-hidden="true"><use href="icons.svg#i-chevron-down"/></svg>
-                            </button>
-                        </div>
-                        <div class="anatomy-content" id="anatomyContent"></div>
-                    </div>
-
-                    <div class="query-actions">
-                        <button class="btn btn-primary btn-large" id="executeQuery" type="button">
-                            <svg class="icon" aria-hidden="true"><use href="icons.svg#i-play"/></svg> Run query
-                        </button>
-                        <button class="btn btn-secondary" id="clearQuery" type="button">
-                            <svg class="icon" aria-hidden="true"><use href="icons.svg#i-eraser"/></svg> Clear results
-                        </button>
-                        <span class="shortcut-hint">or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd></span>
-                    </div>
-
-                    <div class="builder-panel history-panel" id="historyPanel" hidden>
-                        <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-clock-rotate-left"/></svg> Recent queries</h3>
-                        <ul class="history-list" id="queryHistory"></ul>
-                    </div>
-
-                    <div class="builder-panel results-panel">
-                        <div class="panel-header">
-                            <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-list-ul"/></svg> Results</h3>
-                            <div class="result-count" id="resultCount" aria-live="polite"></div>
-                        </div>
-                        <div class="result-actions" id="resultActions" hidden>
-                            <button class="action-chip" id="exportCsv" type="button">
-                                <svg class="icon" aria-hidden="true"><use href="icons.svg#i-file-csv"/></svg> Copy as CSV
-                            </button>
-                            <button class="action-chip" id="exportJson" type="button">
-                                <svg class="icon" aria-hidden="true"><use href="icons.svg#i-file-code"/></svg> Copy as JSON
-                            </button>
-                            <button class="action-chip action-chip-primary" id="copyValueSet" type="button"
-                                    title="A FHIR ValueSet whose compose rule is this ECL">
-                                <svg class="icon" aria-hidden="true"><use href="icons.svg#i-file-medical"/></svg> Copy as FHIR ValueSet
-                            </button>
-                            <button class="action-chip" id="downloadValueSet" type="button"
-                                    title="Download the ValueSet including the concepts loaded so far">
-                                <svg class="icon" aria-hidden="true"><use href="icons.svg#i-download"/></svg> Download .json
-                            </button>
-                        </div>
-                        <div class="results-container" id="resultsContainer"></div>
-                        <button class="btn btn-secondary btn-block" id="loadMore" type="button" hidden>
-                            <svg class="icon" aria-hidden="true"><use href="icons.svg#i-plus"/></svg> Load more
-                        </button>
-                    </div>
+            <div class="compare-inputs">
+                <div class="compare-input">
+                    <label for="eclA"><span class="compare-badge compare-badge-a">A</span> First expression</label>
+                    <textarea id="eclA" class="form-control ecl-textarea" rows="5" spellcheck="false"></textarea>
+                </div>
+                <button class="swap-button" id="swapQueries" type="button" title="Swap A and B">
+                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-right-left"/></svg><span class="sr-only">Swap the two expressions</span>
+                </button>
+                <div class="compare-input">
+                    <label for="eclB"><span class="compare-badge compare-badge-b">B</span> Second expression</label>
+                    <textarea id="eclB" class="form-control ecl-textarea" rows="5" spellcheck="false"></textarea>
                 </div>
             </div>
+
+            <div class="compare-actions">
+                <button class="btn btn-primary btn-large" id="runCompare" type="button">
+                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-code-compare"/></svg> Compare
+                </button>
+            </div>
+
+            <div class="compare-counts">
+                <div class="compare-count"><span class="compare-count-value" id="countA">—</span><span class="compare-count-label">In A</span></div>
+                <div class="compare-count compare-count-both"><span class="compare-count-value" id="countBoth">—</span><span class="compare-count-label">In both</span></div>
+                <div class="compare-count"><span class="compare-count-value" id="countB">—</span><span class="compare-count-label">In B</span></div>
+            </div>
+
+            <div class="compare-summary" id="compareSummary"></div>
+
+            <div class="compare-tabs" id="compareTabs" role="tablist" hidden>
+                <button class="compare-tab active" data-tab="onlyA" role="tab" aria-selected="true" type="button">Only in A</button>
+                <button class="compare-tab" data-tab="both" role="tab" aria-selected="false" type="button">In both</button>
+                <button class="compare-tab" data-tab="onlyB" role="tab" aria-selected="false" type="button">Only in B</button>
+            </div>
+
+            <div class="compare-results" id="compareResults"></div>
         </div>
     </section>
     </main>
@@ -280,6 +219,6 @@
     </div>
     <!-- @endpartial -->
 
-    <script type="module" src="js/builder.js"></script>
+    <script type="module" src="js/compare.js"></script>
 </body>
 </html>

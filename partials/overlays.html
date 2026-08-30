@@ -1,0 +1,26 @@
+<div class="toast" id="toast" role="status" aria-live="polite">
+    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-circle-check"/></svg>
+    <span id="toastMessage"></span>
+</div>
+
+<div class="modal-overlay" id="changelogModal" role="dialog" aria-modal="true" aria-labelledby="changelogTitle">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="changelogTitle"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-clock-rotate-left"/></svg> Changelog</h3>
+            <button class="modal-close" type="button" aria-label="Close changelog"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-xmark"/></svg></button>
+        </div>
+        <div class="modal-body" id="changelogContent">
+            <div class="modal-loading"><svg class="icon icon-spin" aria-hidden="true"><use href="icons.svg#i-spinner"/></svg> Loading changelog…</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="serverModal" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
+    <div class="modal modal-signin">
+        <div class="modal-header">
+            <h3 id="serverModalTitle"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-server"/></svg> <span id="serverModalHeading">Connect to the terminology server</span></h3>
+            <button class="modal-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-xmark"/></svg></button>
+        </div>
+        <div class="modal-body" id="serverPanelBody"></div>
+    </div>
+</div>
