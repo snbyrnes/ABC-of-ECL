@@ -3503,6 +3503,50 @@ kbd {
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
 }
 
+/* Which server you are connecting to. Shown as a fact rather than a heading,
+   because the panel's framing is about FHIR servers in general. */
+.signin-server {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 14px;
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+}
+
+.signin-server-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.signin-server-value {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+}
+
+.signin-server-value strong { color: var(--text-primary); font-size: 0.9375rem; }
+
+.signin-server-region {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.signin-server-value code {
+    flex-basis: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    word-break: break-all;
+}
+
+.signin-help a { margin-left: 0.35rem; }
+
 .signin-secret { position: relative; }
 .signin-secret input { padding-right: 46px; }
 
