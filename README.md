@@ -60,9 +60,9 @@ its own — anything committed here would be world-readable.
 - They are sent only to `nmpc.hse.ie` and reach no server belonging to this project
 - **Sign out** removes them from both stores
 
-The HSE Keycloak realm also supports `authorization_code` with PKCE, which needs no secret at
-all. If a public client is registered for this site, that becomes the better option and
-[`js/auth.js`](js/auth.js) is written so a second grant type slots in beside the existing one.
+The server's identity provider also supports the authorization code flow with PKCE, which needs
+no secret. [`js/auth.js`](js/auth.js) is written so a second grant type can sit alongside the
+existing one; see [roadmap.md](roadmap.md).
 
 ---
 
@@ -91,9 +91,6 @@ Results copy as CSV or JSON. A query also exports as a **FHIR ValueSet** whose
 definition travels and can be re-expanded later, rather than freezing today's
 answer. The downloaded file additionally carries the concepts loaded so far, and
 says so explicitly when that is only part of the set.
-
-The exported resource is tested by posting it back to the server and confirming
-it expands to the same concepts.
 
 ---
 
@@ -163,11 +160,9 @@ self-hosted latin subsets.
 node tools/make-icon-sprite.js   # after adding or removing an icon
 ```
 
-The generator scans for all three ways an icon can be referenced — a sprite
-reference in markup, an `icon('name')` call, or an `icon: 'fa-name'` entry in
-data — and CI fails if the committed sprite is out of date. `check-assets.js`
-separately verifies that every referenced symbol exists, because a missing one
-renders as nothing at all.
+The generator scans for every way an icon can be referenced, and CI fails if the
+committed sprite is out of date or if a page references a symbol that does not
+exist.
 
 Icons are Font Awesome Free (CC BY 4.0). Inter and JetBrains Mono are SIL OFL 1.1.
 
@@ -192,12 +187,9 @@ node tools/make-images.js        # regenerate app icons and og-image.png
 node tools/make-icon-sprite.js   # regenerate icons.svg
 ```
 
-`check-assets.js` exists because a manifest once shipped pointing at icons that were never
-committed. It now fails the build instead.
-
-`verify-concepts.js` runs monthly in CI. SNOMED releases twice a year and concepts get
-inactivated between releases; without the check, a stale ID shows up as an empty result set and
-a learner assumes they wrote the query wrong.
+`verify-concepts.js` also runs monthly in CI. SNOMED CT releases twice a year and concepts are
+inactivated between releases, so a hard-coded ID can go stale; the check catches that before
+anyone hits an unexplained empty result.
 
 ---
 
@@ -211,9 +203,9 @@ To deploy your own copy:
 2. **Settings → Pages → Source → GitHub Actions**
 3. Push to `main`
 
-Optional repository secrets `NMPC_CLIENT_ID` and `NMPC_CLIENT_SECRET` let the monthly
-terminology check validate Irish extension concept IDs. Without them those IDs are reported as
-skipped rather than failing the run.
+The monthly terminology check can validate Irish extension concept IDs if the repository
+provides `NMPC_CLIENT_ID` and `NMPC_CLIENT_SECRET` as secrets. Without them, those IDs are
+reported as skipped rather than failing the run.
 
 ---
 
