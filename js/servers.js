@@ -113,11 +113,13 @@ export const SERVERS = {
         fhirBase: 'https://nmpc.hse.ie/production1/fhir',
         edition: 'Irish drugs module',
         editionUri: 'http://snomed.info/sct/1601000220105',
-        docsUrl: 'https://nmpc.hse.ie/',
+        docsUrl: 'https://nmpc.hse.ie/browser',
         auth: {
             type: 'oauth2-client-credentials',
             tokenUrl: 'https://nmpc.hse.ie/authorisation/auth/realms/terminology/protocol/openid-connect/token',
-            note: 'Requires an HSE-issued client ID and secret.'
+            // Shown in the sign-in panel. Keep it about where credentials come
+            // from; the panel supplies the generic framing around it.
+            note: 'Credentials for this server are issued by the HSE.'
         },
         model: DMD_IE
     },
