@@ -265,14 +265,22 @@ function renderSignedIn(server) {
 
 function renderSignedOut(server) {
     const body = document.getElementById('serverPanelBody');
-    document.getElementById('serverModalHeading').textContent = `Sign in to ${server.name}`;
+    document.getElementById('serverModalHeading').textContent = 'Connect a terminology server';
     body.innerHTML = `
         <p class="signin-intro">
-            ${escapeHtml(server.name)} (${escapeHtml(server.region)}) needs an HSE-issued client ID and
-            secret. Enter yours to run queries against the national catalogue.
+            ABC of ECL builds and explains ECL expressions, then runs them against a FHIR
+            terminology server. Enter the credentials you have been provided to connect.
         </p>
         <form class="signin-form" id="signinForm" novalidate>
-            ${serverChooser()}
+            ${serverChooser() || `
+                <div class="signin-server">
+                    <span class="signin-server-label">Server</span>
+                    <span class="signin-server-value">
+                        <strong>${escapeHtml(server.name)}</strong>
+                        <span class="signin-server-region">${escapeHtml(server.region)}</span>
+                        <code>${escapeHtml(server.fhirBase)}</code>
+                    </span>
+                </div>`}
             <div class="signin-field">
                 <label for="credClientId">Client ID</label>
                 <input type="text" id="credClientId" autocomplete="username" spellcheck="false"
@@ -306,8 +314,8 @@ function renderSignedOut(server) {
             browser. This site is fully static and has no backend, so nothing reaches it.
         </p>
         <p class="signin-help">
-            No credentials? Request access through the
-            <a href="https://nmpc.hse.ie/browser" target="_blank" rel="noopener">HSE NMPC service</a>.
+            ${escapeHtml(server.auth.note || 'Credentials are issued by whoever operates the server.')}
+            ${server.docsUrl ? `<a href="${escapeHtml(server.docsUrl)}" target="_blank" rel="noopener">About this server</a>` : ''}
         </p>`;
 
     const form = document.getElementById('signinForm');
