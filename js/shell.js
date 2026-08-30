@@ -1,6 +1,6 @@
 /**
  * Page shell: theme, navigation, toasts, the changelog modal and the
- * terminology server sign-in. Loaded by every page.
+ * FHIR server sign-in. Loaded by every page.
  */
 
 import { listServers, getServer, getSelectedServerId, setSelectedServerId,
@@ -175,7 +175,7 @@ function initChangelog() {
     trapFocus(modal);
 }
 
-/* ---------- terminology server sign-in ---------- */
+/* ---------- FHIR server sign-in ---------- */
 
 const DISMISS_KEY = 'ecl.signinDismissed';
 
@@ -213,7 +213,7 @@ function serverChooser() {
     if (!hasServerChoice()) return '';
     const selected = getSelectedServerId();
     return `<div class="signin-field">
-        <label for="serverChoice">Terminology server</label>
+        <label for="serverChoice">FHIR server</label>
         <select id="serverChoice" class="form-control">
             ${listServers().map(s => `<option value="${escapeHtml(s.id)}" ${s.id === selected ? 'selected' : ''}>
                 ${escapeHtml(s.name)} — ${escapeHtml(s.region)}</option>`).join('')}
@@ -265,11 +265,11 @@ function renderSignedIn(server) {
 
 function renderSignedOut(server) {
     const body = document.getElementById('serverPanelBody');
-    document.getElementById('serverModalHeading').textContent = 'Connect a terminology server';
+    document.getElementById('serverModalHeading').textContent = 'Connect a FHIR server';
     body.innerHTML = `
         <p class="signin-intro">
             ABC of ECL builds and explains ECL expressions, then runs them against a FHIR
-            terminology server. Enter the credentials you have been provided to connect.
+            server. Enter the credentials you have been provided to connect.
         </p>
         <form class="signin-form" id="signinForm" novalidate>
             ${serverChooser() || `
