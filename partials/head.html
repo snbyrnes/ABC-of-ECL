@@ -1,0 +1,25 @@
+<meta name="theme-color" content="#6366f1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ABC of ECL">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<script>
+    /* Applied before first paint so a dark-theme visitor never sees a white flash.
+       Light is the default; dark is opt-in via the toggle, not the OS setting. */
+    (function () {
+        var theme = 'light';
+        try { theme = localStorage.getItem('ecl.theme') || 'light'; } catch (e) { /* storage blocked */ }
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+<!-- Fonts and icons are served from this origin. Nothing here depends on a
+     third-party CDN, which a locked-down hospital network may refuse. -->
+<link rel="preconnect" href="https://nmpc.hse.ie">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="icons.svg" as="image" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">

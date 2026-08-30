@@ -3,271 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECL Examples - SNOMED CT Query Examples | ABC of ECL</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Practical ECL query examples for SNOMED CT. Learn from real examples including paracetamol products, oral medications, diabetes disorders, injectable drugs, and clinical findings queries.">
-    <meta name="keywords" content="ECL examples, SNOMED CT examples, ECL query examples, paracetamol ECL, medication queries, clinical findings ECL, dose form queries, drug product queries, ECL syntax examples">
+    <title>ECL Examples &amp; Syntax Reference | ABC of ECL</title>
+
+    <meta name="description" content="Worked SNOMED CT ECL examples for the Irish medicines catalogue, plus a syntax reference where every card runs in one click.">
+    <meta name="keywords" content="ECL examples, SNOMED CT queries, ECL syntax reference, NMPC, VTM VMP AMP, expression constraint language examples">
     <meta name="author" content="ABC of ECL">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://snbyrnes.github.io/ABC-of-ECL/examples.html">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="ECL Examples - SNOMED CT Query Examples">
-    <meta property="og:description" content="Browse practical ECL query examples for medicines, clinical findings, and procedures. Each example includes a 'Try it' button to test in the query builder.">
+
+    <meta property="og:title" content="ECL Examples &amp; Syntax Reference">
+    <meta property="og:description" content="Worked ECL examples and a complete syntax reference. Every expression is runnable in one click.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://snbyrnes.github.io/ABC-of-ECL/examples.html">
     <meta property="og:site_name" content="ABC of ECL">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Additional SEO -->
+    <meta property="og:image" content="https://snbyrnes.github.io/ABC-of-ECL/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_IE">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- @partial head -->
     <meta name="theme-color" content="#6366f1">
-    
-    <!-- Favicon & PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ABC of ECL">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "ECL Query Examples",
-        "description": "A collection of practical SNOMED CT ECL query examples for learning Expression Constraint Language.",
-        "url": "https://snbyrnes.github.io/ABC-of-ECL/examples.html",
-        "isPartOf": {
-            "@type": "WebSite",
-            "name": "ABC of ECL",
-            "url": "https://snbyrnes.github.io/ABC-of-ECL/"
-        }
-    }
+    <script>
+        /* Applied before first paint so a dark-theme visitor never sees a white flash.
+           Light is the default; dark is opt-in via the toggle, not the OS setting. */
+        (function () {
+            var theme = 'light';
+            try { theme = localStorage.getItem('ecl.theme') || 'light'; } catch (e) { /* storage blocked */ }
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
     </script>
+    <!-- Fonts and icons are served from this origin. Nothing here depends on a
+         third-party CDN, which a locked-down hospital network may refuse. -->
+    <link rel="preconnect" href="https://nmpc.hse.ie">
+    <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="icons.svg" as="image" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <!-- @endpartial -->
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://snbyrnes.github.io/ABC-of-ECL/"
-        }, {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Examples",
-            "item": "https://snbyrnes.github.io/ABC-of-ECL/examples.html"
-        }]
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://snbyrnes.github.io/ABC-of-ECL/" },
+            { "@type": "ListItem", "position": 2, "name": "Examples", "item": "https://snbyrnes.github.io/ABC-of-ECL/examples.html" }
+        ]
     }
     </script>
-    
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
+    <!-- @partial nav -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <!-- Navigation -->
     <nav class="navbar" aria-label="Main navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-                <i class="fas fa-code"></i>
+                <svg class="icon" aria-hidden="true"><use href="icons.svg#i-code"/></svg>
                 ABC of ECL
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="builder.html">Query Builder</a></li>
-                <li><a href="examples.html" class="active">Examples</a></li>
+                <li><a href="compare.html">Compare</a></li>
+                <li><a href="examples.html" class="active" aria-current="page">Examples</a></li>
                 <li><a href="resources.html">Resources</a></li>
             </ul>
-            <button class="theme-toggle" id="themeToggle" title="Toggle theme">
-                <i class="fas fa-moon"></i>
-            </button>
-            <button class="mobile-menu" id="mobileMenu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="nav-tools">
+                <button class="server-button" id="serverButton" type="button" aria-label="Terminology server">
+                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-server"/></svg>
+                </button>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-moon"/></svg>
+                </button>
+                <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Menu"
+                        aria-expanded="false" aria-controls="navLinks">
+                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-bars"/></svg>
+                </button>
+            </div>
         </div>
     </nav>
+    <!-- @endpartial -->
 
     <main id="main-content">
-    <!-- Examples Section -->
-    <section id="examples" class="examples-section page-section" aria-labelledby="examples-heading">
+    <section class="examples-section page-section" aria-labelledby="examples-heading">
         <div class="container">
             <div class="section-header">
-                <h2 id="examples-heading">Example Queries</h2>
-                <p>Learn from these practical ECL examples</p>
+                <h2 id="examples-heading">Examples &amp; Syntax</h2>
+                <p>Every expression opens in the builder, ready to run against the HSE catalogue</p>
             </div>
-            
+
             <div class="examples-grid">
-                <div class="example-card">
+                <div class="example-card" data-ecl-block="^ 660351000220100 |VTM reference set|">
                     <div class="example-header">
-                        <h4>Products containing Paracetamol</h4>
-                        <a href="builder.html?example=paracetamol" class="try-btn">Try it</a>
+                        <h4>Every Virtual Therapeutic Moiety</h4>
                     </div>
-                    <p class="example-description">Find all medicinal products that contain paracetamol as an active ingredient.</p>
-                    <pre class="example-code"><code>&lt;&lt; 763158003 |Medicinal product| :
-  &lt;&lt; 127489000 |Has active ingredient| = 
+                    <p class="example-description">The substances a prescriber chooses between, with no strength, form or brand attached. The top of the Irish product hierarchy.</p>
+                    <pre class="example-code"><code>^ 660351000220100 |VTM reference set|</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="^ 660371000220109 |VMP reference set| : 127489000 |Has active ingredient| = << 387517004 |Paracetamol|">
+                    <div class="example-header">
+                        <h4>Generic paracetamol products</h4>
+                    </div>
+                    <p class="example-description">Virtual Medicinal Products containing paracetamol — strength and dose form, but no brand.</p>
+                    <pre class="example-code"><code>^ 660371000220109 |VMP reference set| :
+  127489000 |Has active ingredient| =
     &lt;&lt; 387517004 |Paracetamol|</code></pre>
                 </div>
-                
-                <div class="example-card">
+
+                <div class="example-card" data-ecl-block="^ 660401000220107 |AMPP reference set| : 1142142004 |Has pack size| = #24">
                     <div class="example-header">
-                        <h4>Oral Amoxicillin Products</h4>
-                        <a href="builder.html?example=amoxicillin" class="try-btn">Try it</a>
+                        <h4>Packs of 24</h4>
                     </div>
-                    <p class="example-description">Find medicinal products with amoxicillin in oral dose form.</p>
+                    <p class="example-description">Dispensable packs containing exactly 24 units. Pack size is numeric, so it is matched with <code>#</code> rather than a concept.</p>
+                    <pre class="example-code"><code>^ 660401000220107 |AMPP reference set| :
+  1142142004 |Has pack size| = #24</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="^ 660371000220109 |VMP reference set| MINUS (^ 660371000220109 |VMP reference set| : 127489000 |Has active ingredient| = << 764146007 |Penicillin|)">
+                    <div class="example-header">
+                        <h4>Penicillin-free products</h4>
+                    </div>
+                    <p class="example-description">Everything except products containing any penicillin. This is the shape of an allergy exclusion: start with all, subtract what must be avoided.</p>
+                    <pre class="example-code"><code>^ 660371000220109 |VMP reference set|
+MINUS
+(^ 660371000220109 |VMP reference set| :
+  127489000 |Has active ingredient| =
+    &lt;&lt; 764146007 |Penicillin|)</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="^ 660381000220107 |AMP reference set| : 680061000220102 |Has marketing authorisation holder| = 253961000220103 |Accord Healthcare Ireland Ltd|">
+                    <div class="example-header">
+                        <h4>Products from one manufacturer</h4>
+                    </div>
+                    <p class="example-description">Branded products whose marketing authorisation is held by a named company. Marketing authorisation holder is an Irish extension attribute.</p>
+                    <pre class="example-code"><code>^ 660381000220107 |AMP reference set| :
+  680061000220102 |Has marketing authorisation holder| =
+    253961000220103 |Accord Healthcare Ireland Ltd|</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="(< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 387517004 |Paracetamol|) AND (< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 387494007 |Codeine|)">
+                    <div class="example-header">
+                        <h4>Combination products</h4>
+                    </div>
+                    <p class="example-description">Products containing both paracetamol and codeine. Each side of the <code>AND</code> is a complete constraint, so the result is the intersection of the two sets.</p>
+                    <pre class="example-code"><code>(&lt; 763158003 |Medicinal product| :
+   127489000 |Has active ingredient| = &lt;&lt; 387517004 |Paracetamol|)
+AND
+(&lt; 763158003 |Medicinal product| :
+   127489000 |Has active ingredient| = &lt;&lt; 387494007 |Codeine|)</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="^ 660371000220109 |VMP reference set| : 127489000 |Has active ingredient| = << 387517004 |Paracetamol|, 1142135004 |Has presentation strength numerator value| = #500">
+                    <div class="example-header">
+                        <h4>Paracetamol at 500 mg</h4>
+                    </div>
+                    <p class="example-description">Dose-based prescribing. Strength is a number, so it is matched with <code>#</code> rather than a concept, and the comma means both conditions must hold.</p>
+                    <pre class="example-code"><code>^ 660371000220109 |VMP reference set| :
+  127489000 |Has active ingredient| = &lt;&lt; 387517004 |Paracetamol|,
+  1142135004 |Has presentation strength numerator value| = #500</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="^ 679971000220107 |Non prescribable indicator|">
+                    <div class="example-header">
+                        <h4>Non-prescribable products</h4>
+                    </div>
+                    <p class="example-description">An Irish indicator reference set. Membership is curated by the release centre, so the subtype hierarchy plays no part.</p>
+                    <pre class="example-code"><code>^ 679971000220107 |Non prescribable indicator|</code></pre>
+                </div>
+
+                <div class="example-card" data-ecl-block="< 763158003 |Medicinal product| : 411116001 |Has manufactured dose form| = << 385268001 |Oral dose form|">
+                    <div class="example-header">
+                        <h4>Oral products</h4>
+                    </div>
+                    <p class="example-description">Products whose manufactured dose form is oral, or any subtype of it. Note the attribute is <em>Has manufactured dose form</em> — the older name "Has dose form" still circulates but is out of date.</p>
                     <pre class="example-code"><code>&lt; 763158003 |Medicinal product| :
-  411116001 |Has dose form| = 
-    &lt;&lt; 385268001 |Oral dose form|,
-  &lt;&lt; 127489000 |Has active ingredient| = 
-    &lt;&lt; 372687004 |Amoxicillin|</code></pre>
-                </div>
-                
-                <div class="example-card">
-                    <div class="example-header">
-                        <h4>Diabetes Disorders</h4>
-                        <a href="builder.html?example=diabetes" class="try-btn">Try it</a>
-                    </div>
-                    <p class="example-description">Find all types of diabetes mellitus and related conditions.</p>
-                    <pre class="example-code"><code>&lt;&lt; 73211009 |Diabetes mellitus|</code></pre>
-                </div>
-                
-                <div class="example-card">
-                    <div class="example-header">
-                        <h4>Lung Disorders with Edema</h4>
-                        <a href="builder.html?example=lung-edema" class="try-btn">Try it</a>
-                    </div>
-                    <p class="example-description">Find lung disorders that have edema as the morphology.</p>
-                    <pre class="example-code"><code>&lt; 19829001 |Disorder of lung| :
-  116676008 |Associated morphology| = 
-    &lt;&lt; 79654002 |Edema|</code></pre>
-                </div>
-                
-                <div class="example-card">
-                    <div class="example-header">
-                        <h4>Injectable Products</h4>
-                        <a href="builder.html?example=injectable" class="try-btn">Try it</a>
-                    </div>
-                    <p class="example-description">Find products with injection or parenteral dose forms.</p>
-                    <pre class="example-code"><code>&lt;&lt; 763158003 |Medicinal product| :
-  411116001 |Has dose form| = 
-    &lt;&lt; 385219001 |Injection dose form|</code></pre>
-                </div>
-                
-                <div class="example-card">
-                    <div class="example-header">
-                        <h4>Products Causing Reactions</h4>
-                        <a href="builder.html?example=causative" class="try-btn">Try it</a>
-                    </div>
-                    <p class="example-description">Find concepts where paracetamol is the causative agent.</p>
-                    <pre class="example-code"><code>*: 246075003 |Causative agent| = 
-  387517004 |Paracetamol|</code></pre>
+  411116001 |Has manufactured dose form| =
+    &lt;&lt; 385268001 |Oral dose form|</code></pre>
                 </div>
             </div>
 
-            <!-- ECL Syntax Examples -->
-            <div class="syntax-examples">
-                <h3>ECL Syntax Quick Reference</h3>
-                
+            <div class="syntax-examples" id="syntax">
+                <h3>ECL syntax reference</h3>
+                <p class="syntax-intro">Each card is a working query. Run it, then change one character and run it again.</p>
+
                 <div class="syntax-grid">
-                    <div class="syntax-card">
-                        <h4>Self</h4>
-                        <p>Match only the specified concept</p>
-                        <pre><code>404684003 |Clinical finding|</code></pre>
+                    <div class="syntax-card" data-ecl-block="763158003 |Medicinal product|">
+                        <h4>Self</h4><p>Match only the concept named</p>
+                        <pre><code>763158003 |Medicinal product|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Descendants</h4>
-                        <p>All subtypes of a concept</p>
-                        <pre><code>&lt; 404684003 |Clinical finding|</code></pre>
+                    <div class="syntax-card" data-ecl-block="< 763158003 |Medicinal product|">
+                        <h4>Descendants</h4><p>Everything beneath it, not itself</p>
+                        <pre><code>&lt; 763158003 |Medicinal product|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Descendants or Self</h4>
-                        <p>Concept plus all its subtypes</p>
-                        <pre><code>&lt;&lt; 73211009 |Diabetes mellitus|</code></pre>
+                    <div class="syntax-card" data-ecl-block="<< 763158003 |Medicinal product|">
+                        <h4>Descendants or self</h4><p>The concept plus everything beneath it</p>
+                        <pre><code>&lt;&lt; 763158003 |Medicinal product|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Children</h4>
-                        <p>Direct children only (one level)</p>
-                        <pre><code>&lt;! 404684003 |Clinical finding|</code></pre>
+                    <div class="syntax-card" data-ecl-block="<! 763158003 |Medicinal product|">
+                        <h4>Children</h4><p>One level down only</p>
+                        <pre><code>&lt;! 763158003 |Medicinal product|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Ancestors</h4>
-                        <p>All supertypes of a concept</p>
-                        <pre><code>&gt; 40541001 |Acute pulmonary edema|</code></pre>
+                    <div class="syntax-card" data-ecl-block="> 387517004 |Paracetamol|">
+                        <h4>Ancestors</h4><p>Everything above it</p>
+                        <pre><code>&gt; 387517004 |Paracetamol|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Parents</h4>
-                        <p>Direct parents only (one level)</p>
-                        <pre><code>&gt;! 40541001 |Acute pulmonary edema|</code></pre>
+                    <div class="syntax-card" data-ecl-block=">! 387517004 |Paracetamol|">
+                        <h4>Parents</h4><p>One level up only</p>
+                        <pre><code>&gt;! 387517004 |Paracetamol|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Member Of</h4>
-                        <p>Concepts in a reference set</p>
-                        <pre><code>^ 700043003 |Example refset|</code></pre>
+                    <div class="syntax-card" data-ecl-block="^ 660351000220100 |VTM reference set|">
+                        <h4>Member of</h4><p>Concepts in a reference set</p>
+                        <pre><code>^ 660351000220100 |VTM reference set|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Any</h4>
-                        <p>Match any concept</p>
-                        <pre><code>*</code></pre>
+                    <div class="syntax-card" data-ecl-block="< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = *">
+                        <h4>Any value</h4><p>Has the attribute at all</p>
+                        <pre><code>&lt; 763158003 |Medicinal product| :
+  127489000 |Has active ingredient| = *</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Attribute Refinement</h4>
-                        <p>Filter by attribute value</p>
-                        <pre><code>&lt; 404684003 |Clinical finding| :
-  116676008 |Associated morphology| = 
-    79654002 |Edema|</code></pre>
+                    <div class="syntax-card" data-ecl-block="< 763158003 |Medicinal product| : 411116001 |Has manufactured dose form| = << 385268001 |Oral dose form|">
+                        <h4>Attribute refinement</h4><p>Filter by an attribute value</p>
+                        <pre><code>&lt; 763158003 |Medicinal product| :
+  411116001 |Has manufactured dose form| =
+    &lt;&lt; 385268001 |Oral dose form|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Multiple Attributes</h4>
-                        <p>Multiple conditions (AND)</p>
-                        <pre><code>&lt; 404684003 |Clinical finding| :
-  363698007 |Finding site| = &lt;&lt; 39057004 |Pulmonary valve|,
-  116676008 |Associated morphology| = &lt;&lt; 415582006 |Stenosis|</code></pre>
+                    <div class="syntax-card" data-ecl-block="^ 660371000220109 |VMP reference set| : 127489000 |Has active ingredient| = << 387517004 |Paracetamol|, 411116001 |Has manufactured dose form| = << 385268001 |Oral dose form|">
+                        <h4>Multiple attributes</h4><p>A comma means all must match</p>
+                        <pre><code>^ 660371000220109 |VMP reference set| :
+  127489000 |Has active ingredient| = &lt;&lt; 387517004 |Paracetamol|,
+  411116001 |Has manufactured dose form| = &lt;&lt; 385268001 |Oral dose form|</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Conjunction (AND)</h4>
-                        <p>Must match both constraints</p>
-                        <pre><code>&lt; 19829001 |Disorder of lung| AND
-&lt; 301867009 |Edema of trunk|</code></pre>
+                    <div class="syntax-card" data-ecl-block="(< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 387517004 |Paracetamol|) AND (< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 387494007 |Codeine|)">
+                        <h4>Conjunction</h4><p>Must satisfy both sides</p>
+                        <pre><code>(&lt; 763158003 |Medicinal product| :
+   127489000 |Has active ingredient| = &lt;&lt; 387517004 |Paracetamol|)
+AND
+(&lt; 763158003 |Medicinal product| :
+   127489000 |Has active ingredient| = &lt;&lt; 387494007 |Codeine|)</code></pre>
                     </div>
-                    
-                    <div class="syntax-card">
-                        <h4>Disjunction (OR)</h4>
-                        <p>Match either constraint</p>
-                        <pre><code>&lt; 19829001 |Disorder of lung| OR
-&lt; 301867009 |Edema of trunk|</code></pre>
+                    <div class="syntax-card" data-ecl-block="(< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 387517004 |Paracetamol|) OR (< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 387207008 |Ibuprofen|)">
+                        <h4>Disjunction</h4><p>Either side will do</p>
+                        <pre><code>(&lt; 763158003 |Medicinal product| :
+   127489000 |Has active ingredient| = &lt;&lt; 387517004 |Paracetamol|)
+OR
+(&lt; 763158003 |Medicinal product| :
+   127489000 |Has active ingredient| = &lt;&lt; 387207008 |Ibuprofen|)</code></pre>
+                    </div>
+                    <div class="syntax-card" data-ecl-block="< 763158003 |Medicinal product| MINUS (< 763158003 |Medicinal product| : 127489000 |Has active ingredient| = << 764146007 |Penicillin|)">
+                        <h4>Exclusion</h4><p>Subtract one set from another</p>
+                        <pre><code>&lt; 763158003 |Medicinal product|
+MINUS
+(&lt; 763158003 |Medicinal product| :
+  127489000 |Has active ingredient| =
+    &lt;&lt; 764146007 |Penicillin|)</code></pre>
+                    </div>
+                    <div class="syntax-card" data-ecl-block="^ 660401000220107 |AMPP reference set| : 1142142004 |Has pack size| = #24">
+                        <h4>Numeric value</h4><p>Numbers use <code>#</code></p>
+                        <pre><code>^ 660401000220107 |AMPP reference set| :
+  1142142004 |Has pack size| = #24</code></pre>
                     </div>
                 </div>
+            </div>
+
+            <div class="page-cta">
+                <h3>See what an operator actually changes</h3>
+                <p>Pick any two of these and run them side by side.</p>
+                <a href="compare.html" class="btn btn-primary">
+                    <svg class="icon" aria-hidden="true"><use href="icons.svg#i-code-compare"/></svg> Open Compare
+                </a>
             </div>
         </div>
     </section>
     </main>
 
-    <!-- Footer -->
+    <!-- @partial footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <h3><i class="fas fa-code"></i> ABC of ECL</h3>
+                    <h3><svg class="icon" aria-hidden="true"><use href="icons.svg#i-code"/></svg> ABC of ECL</h3>
                     <p>An interactive learning tool for SNOMED CT Expression Constraint Language, focused on medicines and clinical terminology.</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4>Pages</h4>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="builder.html">Query Builder</a></li>
+                        <li><a href="compare.html">Compare</a></li>
                         <li><a href="examples.html">Examples</a></li>
                         <li><a href="resources.html">Resources</a></li>
                     </ul>
@@ -275,49 +306,59 @@
                 <div class="footer-links">
                     <h4>Documentation</h4>
                     <ul>
-                        <li><a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank">ECL Specification</a></li>
-                        <li><a href="https://browser.ihtsdotools.org/" target="_blank">SNOMED Browser</a></li>
-                        <li><a href="https://www.snomed.org/" target="_blank">SNOMED International</a></li>
+                        <li><a href="https://docs.snomed.org/snomed-ct-specifications/snomed-ct-expression-constraint-language/" target="_blank" rel="noopener">ECL Specification</a></li>
+                        <li><a href="https://browser.ihtsdotools.org/" target="_blank" rel="noopener">SNOMED Browser</a></li>
+                        <li><a href="https://www.snomed.org/" target="_blank" rel="noopener">SNOMED International</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Server</h4>
+                    <h4>Terminology</h4>
                     <ul>
-                        <li><a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver FHIR R4</a></li>
-                        <li><a href="https://confluence.csiro.au/display/FHIR" target="_blank">CSIRO FHIR</a></li>
+                        <li><a href="https://nmpc.hse.ie/browser" target="_blank" rel="noopener">HSE NMPC browser</a></li>
+                        <li><a href="https://www.hse.ie" target="_blank" rel="noopener">HSE</a></li>
+                        <li><a href="resources.html#servers">About the server</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 ABC of ECL. For educational purposes. Not for clinical use.</p>
-                <p>Powered by <a href="https://r4.ontoserver.csiro.au/fhir" target="_blank">Ontoserver</a> | SNOMED CT® is a trademark of SNOMED International | <a href="#" id="changelogLink">Changelog</a></p>
+                <p>&copy; <span data-year>2026</span> ABC of ECL. For educational purposes. Not for clinical use.</p>
+                <p>SNOMED CT&reg; is a trademark of SNOMED International |
+                   <a href="#" id="changelogLink">Changelog</a> |
+                   <a href="https://github.com/snbyrnes/ABC-of-ECL" target="_blank" rel="noopener">GitHub</a></p>
             </div>
         </div>
     </footer>
+    <!-- @endpartial -->
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Copied to clipboard!</span>
+    <!-- @partial overlays -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <svg class="icon" aria-hidden="true"><use href="icons.svg#i-circle-check"/></svg>
+        <span id="toastMessage"></span>
     </div>
 
-    <!-- Changelog Modal -->
-    <div class="modal-overlay" id="changelogModal">
+    <div class="modal-overlay" id="changelogModal" role="dialog" aria-modal="true" aria-labelledby="changelogTitle">
         <div class="modal">
             <div class="modal-header">
-                <h3><i class="fas fa-history"></i> Changelog</h3>
-                <button class="modal-close" id="closeChangelog">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3 id="changelogTitle"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-clock-rotate-left"/></svg> Changelog</h3>
+                <button class="modal-close" type="button" aria-label="Close changelog"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-xmark"/></svg></button>
             </div>
             <div class="modal-body" id="changelogContent">
-                <div class="modal-loading">
-                    <i class="fas fa-spinner fa-spin"></i> Loading changelog...
-                </div>
+                <div class="modal-loading"><svg class="icon icon-spin" aria-hidden="true"><use href="icons.svg#i-spinner"/></svg> Loading changelog…</div>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <div class="modal-overlay" id="serverModal" role="dialog" aria-modal="true" aria-labelledby="serverModalTitle">
+        <div class="modal modal-signin">
+            <div class="modal-header">
+                <h3 id="serverModalTitle"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-server"/></svg> <span id="serverModalHeading">Connect to the terminology server</span></h3>
+                <button class="modal-close" type="button" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-xmark"/></svg></button>
+            </div>
+            <div class="modal-body" id="serverPanelBody"></div>
+        </div>
+    </div>
+    <!-- @endpartial -->
+
+    <script type="module" src="js/page.js"></script>
 </body>
 </html>
